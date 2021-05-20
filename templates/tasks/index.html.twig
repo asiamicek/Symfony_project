@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Tasks list
+{% endblock %}
+
+{% block body %}
+    <h1>Tasks list</h1>
+    {% if tasks is defined and tasks|length %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Created at</th>
+                <th>Content</th>
+                <th>Priority</th>
+                <th>Deadline</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.createdAt }}</td>
+                    <td>{{ task.content }}</td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.deadline }}</td>
+                    <td>
+                        <a href="{{ url('tasks_show', {id: task.id}) }}" title="Read more">
+                            Read more
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>
+            Empty list!
+        </p>
+    {% endif %}
+{% endblock %}

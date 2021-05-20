@@ -5,7 +5,7 @@
 
 namespace App\Entity;
 
-use App\Repository\TasksRepository;
+use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeInterface;
 
@@ -13,22 +13,23 @@ use DateTimeInterface;
 /**
  * Class Tasks.
  *
- * @ORM\Entity(repositoryClass=TasksRepository::class)
+ *
+ * @ORM\Entity(repositoryClass=TaskRepository::class)
  * @ORM\Table(name="tasks")
  */
-class Tasks
+class Task
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $content;
+    private string $content;
 
     /**
      * @ORM\Column(type="integer")

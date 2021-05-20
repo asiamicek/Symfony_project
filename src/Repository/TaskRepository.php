@@ -2,13 +2,13 @@
 
 namespace App\Repository;
 
-use App\Entity\Tasks;
+use App\Entity\Task;
 
 
 /**
- * Class TasksRepository.
+ * Class TaskRepository.
  */
-class TasksRepository
+class TaskRepository
 {
     /**
      * Items per page.
