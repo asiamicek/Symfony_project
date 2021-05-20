@@ -1,12 +1,20 @@
 <?php
+/**
+ * Tasks entity.
+ */
 
 namespace App\Entity;
 
 use App\Repository\TasksRepository;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeInterface;
+
 
 /**
+ * Class Tasks.
+ *
  * @ORM\Entity(repositoryClass=TasksRepository::class)
+ * @ORM\Table(name="tasks")
  */
 class Tasks
 {
@@ -26,6 +34,26 @@ class Tasks
      * @ORM\Column(type="integer")
      */
     private $priority;
+
+    /**
+     * Created at.
+     *
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * Deadline.
+     *
+     * @var \DateTimeInterface
+     * @ORM\Column(type="datetime")
+     */
+    private $deadline;
+
+
+
+
 
     public function getId(): ?int
     {
