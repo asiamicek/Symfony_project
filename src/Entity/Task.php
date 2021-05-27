@@ -1,6 +1,6 @@
 <?php
 /**
- * Tasks entity.
+ * Task entity.
  */
 
 namespace App\Entity;
@@ -11,7 +11,7 @@ use DateTimeInterface;
 
 
 /**
- * Class Tasks.
+ * Class Task.
  *
  *
  * @ORM\Entity(repositoryClass=TaskRepository::class)
@@ -37,25 +37,15 @@ class Task
     private $priority;
 
     /**
-     * Created at.
-     *
-     *
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * Deadline.
-     *
-     * @var \DateTimeInterface
      * @ORM\Column(type="datetime")
      */
     private $deadline;
-
-
-
-
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -81,6 +71,30 @@ class Task
     public function setPriority(int $priority): self
     {
         $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDeadline(): ?\DateTimeInterface
+    {
+        return $this->deadline;
+    }
+
+    public function setDeadline(\DateTimeInterface $deadline): self
+    {
+        $this->deadline = $deadline;
 
         return $this;
     }

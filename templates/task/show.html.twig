@@ -16,6 +16,7 @@
                 <th>Created at</th>
                 <td>{{ task.createdAt }}</td>
             </tr>
+
             <tr>
                 <th>Content</th>
                 <td>{{ task.content }}</td>
@@ -35,7 +36,7 @@
         </p>
     {% endif %}
         <p>
-            <a href="{{ url('tasks_index') }}" title="Back to the list">
+            <a href="{{url('task_index') }}" title="Back to the list">
                 back to the list
             </a>
         </p>

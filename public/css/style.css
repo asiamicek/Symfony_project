@@ -1,0 +1,62 @@
+body{
+
+}
+.container-fluid{
+
+    width: 80%;
+    margin-left: 20vw;
+    vertical-align: top;
+    padding-left: 1vw;
+    padding-right: 0;
+    padding-top: 10px;
+}
+header{
+    position: fixed;
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    background-color: #a26cafc4;
+}
+img{
+    width:18vw;
+    padding-bottom: 20px;
+}
+.vertical-menu {
+    border-radius: 5%;
+    /* Set a width if you like */
+}
+
+.vertical-menu a {
+    background-color: #eee; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+    font-weight: normal;
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+    background-color: #04AA6D; /* Add a green color to the "active/current" link */
+    color: white;
+}
+
+nav ul{
+    padding-left: 0;
+    list-style-type: none;
+}
+nav li{
+    padding-bottom: 2px;
+}
+
+#foot{
+    text-align: center;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    font-size: smaller;
+    margin-bottom:1vw;
+
+}

@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriesRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoriesRepository::class)
+ * @ORM\Entity(repositoryClass=TagRepository::class)
+ * @ORM\Table(name="tags")
  */
-class Categories
+class Tag
 {
     /**
      * @ORM\Id
@@ -20,21 +21,21 @@ class Categories
     /**
      * @ORM\Column(type="string", length=32)
      */
-    private $category_name;
+    private $tag_name;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCategoryName(): ?string
+    public function getTagName(): ?string
     {
-        return $this->category_name;
+        return $this->tag_name;
     }
 
-    public function setCategoryName(string $category_name): self
+    public function setTagName(string $tag_name): self
     {
-        $this->category_name = $category_name;
+        $this->tag_name = $tag_name;
 
         return $this;
     }

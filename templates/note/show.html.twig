@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_note_details'|trans({'%id%': note.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_note_details'|trans({'%id%': note.id|default('')}) }}</h1>
+    {% if note is defined and note|length %}
+        <table class="table table-striped">
+        <tr>
+
+            <th>Id</th>
+            <th>Title</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+
+        </tr>
+        <tr>
+            <td>{{ note.id }}</td>
+            <td>{{ note.title }}</td>
+            <td>{{ note.createdAt|date('Y/m/d') }}</td>
+            <td>{{ note.updatedAt|date('Y/m/d') }}</td>
+
+        </tr>
+        <tr>
+            <th colspan="5">Content</th>
+        </tr>
+        <tr>
+            <td colspan="5">{{ note.content }}</td>
+        </tr>
+
+
+
+    {% else %}
+        <p>
+            Record not found.
+        </p>
+    {% endif %}
+    <p>
+        <a href="{{url('note_index') }}" title="Back to the list">
+            Back to the list
+        </a>
+    </p>
+{% endblock %}

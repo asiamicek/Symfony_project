@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UsersDataRepository;
+use App\Repository\UserDataRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=UsersDataRepository::class)
+ * @ORM\Entity(repositoryClass=UserDataRepository::class)
+ * @ORM\Table(name="users_data")
  */
-class UsersData
+class UserData
 {
     /**
      * @ORM\Id

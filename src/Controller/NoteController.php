@@ -1,64 +1,64 @@
 <?php
 /**
- * Task controller.
+ * Note controller.
  */
 
 namespace App\Controller;
 
-use App\Entity\Task;
-use App\Repository\TaskRepository;
+use App\Entity\Note;
+use App\Repository\NoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class TaskController.
+ * Class NoteController.
  *
- * @Route("/task")
+ * @Route("/note")
  */
-class TaskController extends AbstractController
+class NoteController extends AbstractController
 {
     /**
      * Index action.
      *
-     * @param \App\Repository\TaskRepository $taskRepository Task repository
+     * @param \App\Repository\NoteRepository $noteRepository Note repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route(
      *     "/",
      *     methods={"GET"},
-     *     name="task_index",
+     *     name="note_index",
      * )
      */
-    public function index(TaskRepository $taskRepository): Response
+    public function index(NoteRepository $noteRepository): Response
     {
         return $this->render(
-            'task/index.html.twig',
-            ['tasks' => $taskRepository->findAll()]
+            'note/index.html.twig',
+            ['notes' => $noteRepository->findAll()]
         );
     }
 
     /**
      * Show action.
      *
-     * @param \App\Repository\TaskRepository $repository Task repository
-     * @param int                              $id        Task id
+     * @param \App\Repository\NoteRepository $repository Note repository
+     * @param int                              $id        Note id
      *
      * @Route(
      *     "/{id}",
      *     methods={"GET"},
-     *     name="task_show",
+     *     name="note_show",
      *     requirements={"id": "[1-9]\d*"},
      * )
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      */
-    public function show(TaskRepository $repository, int $id): Response
+    public function show(Note $note): Response
     {
         return $this->render(
-            'task/show.html.twig',
-            ['task' => $repository->findById($id)]
+            'note/show.html.twig',
+            ['note' => $note]
         );
     }
 }

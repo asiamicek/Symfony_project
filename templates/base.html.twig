@@ -2,12 +2,30 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ asset('image/ikona-apka.png') }}">
+    <title>{% block title %}Notes organizer{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
     {% endblock %}
 </head>
 <body>
+<header>
+    {% block header %}
+        <img src="{{ asset('image/logo_apka-removebg-preview.png') }}" width:13vw >
+        <nav>
+            <ul class="vertical-menu">
+                <li><a href="{{ url('task_index') }}" title="Tasks">Tasks</a></li>
+                <li><a href="{{ url('note_index') }}" title="Notes">Notes</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Tags</a></li>
+            </ul>
+        </nav>
+
+        <p id="foot">© Copyright Joanna Micek</p>
+    {% endblock %}
+</header>
+
 <div class="container-fluid">
     {% block body %}{% endblock %}
 </div>
