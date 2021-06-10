@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_note_details'|trans({'%id%': register.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_note_details'|trans({'%id%': register.id|default('')}) }}</h1>
+
+    {% if register is defined and register|length %}
+        <table class="table table-striped">
+        <tr>
+
+            <th>Id</th>
+            <th>Title</th>
+            <th>Category</th>
+        </tr>
+        <tr>
+            <td>{{ note.id }}</td>
+            <td>{{ note.title }}</td>
+            <td>{{ note.category.category_name }}</td>
+
+        </tr>
+
+
+
+
+    {% else %}
+        <p>
+            Register not found.
+        </p>
+    {% endif %}
+    <p>
+        <a href="{{url('register_index') }}" title="Back to the list">
+            Back to the list
+        </a>
+    </p>
+{% endblock %}

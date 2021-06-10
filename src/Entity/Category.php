@@ -30,9 +30,15 @@ class Category
      */
     private $notes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Register::class, mappedBy="category")
+     */
+    private $registers;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
+        $this->registers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -40,7 +46,7 @@ class Category
         return $this->id;
     }
 
-    public function getCategoryName(): ?string
+    public function getcategory_name(): ?string
     {
         return $this->category_name;
     }
@@ -76,6 +82,36 @@ class Category
             // set the owning side to null (unless already changed)
             if ($note->getCategory() === $this) {
                 $note->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Register[]
+     */
+    public function getRegister(): Collection
+    {
+        return $this->registers;
+    }
+
+    public function addRegister(Register $register): self
+    {
+        if (!$this->register->contains($register)) {
+            $this->register[] = $register;
+            $register->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegister(Register $register): self
+    {
+        if ($this->registers->removeElement($register)) {
+            // set the owning side to null (unless already changed)
+            if ($register->getCategory() === $this) {
+                $register->setCategory(null);
             }
         }
 

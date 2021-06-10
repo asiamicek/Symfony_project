@@ -14,20 +14,19 @@
             <th>Title</th>
             <th>Created at</th>
             <th>Updated at</th>
-
+            <th>Category</th>
         </tr>
         <tr>
             <td>{{ note.id }}</td>
             <td>{{ note.title }}</td>
             <td>{{ note.createdAt|date('Y/m/d') }}</td>
             <td>{{ note.updatedAt|date('Y/m/d') }}</td>
+            <td>{{ note.category.category_name }}</td>
 
         </tr>
         <tr>
-            <th colspan="5">Content</th>
-        </tr>
-        <tr>
-            <td colspan="5">{{ note.content }}</td>
+            <th>Content</th>
+            <td colspan="4">{{ note.content }}</td>
         </tr>
 
 

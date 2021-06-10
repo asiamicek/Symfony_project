@@ -6,26 +6,32 @@
 
 {% block body %}
     <h1>Notes list</h1>
-    {% if notes is defined and notes|length %}
+    {% if pagination is defined and pagination.items|length %}
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+{#    {% if notes is defined and notes|length %}#}
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Created at</th>
-                <th>Updated at</th>
-
-                <th>Actions</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'note.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_title'|trans, 'note.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_created_at'|trans, 'note.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_updated_at'|trans, 'note.updatedAt') }}</th>
+                <th>{{ 'label_category'|trans }}</th>
+                <th>{{ 'label_actions'|trans }}</th>
             </tr>
             </thead>
             <tbody>
-            {% for note in notes %}
+            {% for note in pagination.items %}
                 <tr>
                     <td>{{ note.id }}</td>
                     <td>{{ note.title }}</td>
                     <td>{{ note.createdAt|date('Y/m/d') }}</td>
                     <td>{{ note.updatedAt|date('Y/m/d') }}</td>
-
+                    <td>{{ note.category.category_name }}</td>
                     <td>
                         <a href="{{ url('note_show', {id: note.id}) }}" title="View content">
                             View content
@@ -35,6 +41,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     {% else %}
         <p>
             Empty list!

@@ -1,18 +1,18 @@
 <?php
 /**
- * Note fixtures.
+ * Register fixture.
  */
 
 namespace App\DataFixtures;
 
-use App\Entity\Note;
+use App\Entity\Register;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class NoteFixtures.
+ * Class RegisterFixtures.
  */
-class NoteFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
+class RegisterFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -21,20 +21,15 @@ class NoteFixtures extends AbstractBaseFixtures implements DependentFixtureInter
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(50, 'notes', function ($i){
-            $note = new Note();
-            $note->setTitle($this->faker->word);
-            $note->setContent($this->faker->text);
-            $note->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $note->setUpdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $note->setCategory($this->getRandomReference('categories'));
-
-            return $note;
+        $this->createMany(15, 'registers', function ($i) {
+            $register = new Register();
+            $register->setTitle($this->faker->word);
+            $register->setCategory($this->getRandomReference('categories'));
+            return $register;
         });
 
         $manager->flush();
     }
-
     /**
      * This method must return an array of fixtures classes
      * on which the implementing class depends on.

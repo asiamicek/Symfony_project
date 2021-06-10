@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Registers
+{% endblock %}
+
+{% block body %}
+    <h1>Registers</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        {#    {% if notes is defined and notes|length %}#}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'register.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_title'|trans, 'register.title') }}</th>
+                <th>{{ 'label_category'|trans }}</th>
+                <th>{{ 'label_actions'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for register in pagination.items %}
+                <tr>
+                    <td>{{ register.id }}</td>
+                    <td>{{ register.title }}</td>
+                    <td>{{ register.category.category_name }}</td>
+                    <td>
+                        <a href="{{ url('register_show', {id: register.id}) }}" title="View content">
+                            View content
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% else %}
+        <p>
+            Empty list!
+        </p>
+    {% endif %}
+{% endblock %}
