@@ -5,27 +5,27 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title_note_details'|trans({'%id%': note.id|default('')}) }}</h1>
+    <h1>{{ 'note_details'|trans({'%id%': note.id|default('')}) }}</h1>
     {% if note is defined and note|length %}
         <table class="table table-striped">
         <tr>
 
-            <th>Id</th>
-            <th>Title</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-            <th>Category</th>
+            <th>{{ 'label_id'|trans }}</th>
+            <th>{{ 'label_title'|trans }}</th>
+            <th>{{ 'label_created_at'|trans }}</th>
+            <th>{{ 'label_updated_at'|trans }}</th>
+            <th>{{ 'label_category'|trans }}</th>
         </tr>
         <tr>
             <td>{{ note.id }}</td>
             <td>{{ note.title }}</td>
             <td>{{ note.createdAt|date('Y/m/d') }}</td>
             <td>{{ note.updatedAt|date('Y/m/d') }}</td>
-            <td>{{ note.category.category_name }}</td>
+            <td>{{ note.category.title }}</td>
 
         </tr>
         <tr>
-            <th>Content</th>
+            <th>{{ 'label_content'|trans }}</th>
             <td colspan="4">{{ note.content }}</td>
         </tr>
 
@@ -33,12 +33,16 @@
 
     {% else %}
         <p>
-            Record not found.
+            {{ 'message_no_record'|trans }}
         </p>
     {% endif %}
     <p>
-        <a href="{{url('note_index') }}" title="Back to the list">
-            Back to the list
+        <a href="{{url('note_index') }}" title="{{ 'action_back_to_list'|trans }}">
+            {{ 'action_back_to_list'|trans }}
+        </a>
+        <br>
+        <a href="{{ url('note_edit', {id: note.id}) }}" title="{{ 'action_edit'|trans }}">
+            {{ 'action_edit'|trans }}
         </a>
     </p>
 {% endblock %}

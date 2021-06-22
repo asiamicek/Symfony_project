@@ -5,13 +5,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Register;
-use App\Repository\RegisterRepository;
-use Symfony\Component\HttpFoundation\Request;
+use App\Form\RegisterType;
+use App\Service\RegisterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use \Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Class RegisterController.
@@ -21,11 +23,26 @@ use \Knp\Component\Pager\PaginatorInterface;
 class RegisterController extends AbstractController
 {
     /**
+     * Register service.
+     *
+     * @var \App\Service\RegisterService
+     */
+    private $registerService;
+
+    /**
+     * RegisterController constructor.
+     *
+     * @param \App\Service\RegisterService $registerService Register service
+     */
+    public function __construct(RegisterService $registerService)
+    {
+        $this->registerService = $registerService;
+    }
+
+    /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request        HTTP request
-     * @param \App\Repository\RegisterRepository            $registerRepository Register repository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator      Paginator
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -34,12 +51,15 @@ class RegisterController extends AbstractController
      *     name="register_index",
      * )
      */
-    public function index(Request $request, RegisterRepository $registerRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $registerRepository->findAll(),
+        $filters = [];
+        $filters['category_id'] = $request->query->getInt('filters_category_id');
+
+        $pagination = $this->registerService->createPaginatedList(
             $request->query->getInt('page', 1),
-            RegisterRepository::PAGINATOR_ITEMS_PER_PAGE
+            $this->getUser(),
+            $filters
         );
 
         return $this->render(
@@ -51,8 +71,9 @@ class RegisterController extends AbstractController
     /**
      * Show action.
      *
-     * @param \App\Repository\RegisterRepository $repository Register repository
-     * @param int                              $id        Register id
+     * @param \App\Entity\Register $register Register entity
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route(
      *     "/{id}",
@@ -60,14 +81,152 @@ class RegisterController extends AbstractController
      *     name="register_show",
      *     requirements={"id": "[1-9]\d*"},
      * )
-     *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
      */
     public function show(Register $register): Response
     {
+        if ($register->getAuthor() !== $this->getUser()) {
+            $this->addFlash('warning', 'message_item_not_found');
+
+            return $this->redirectToRoute('register_index');
+        }
+
         return $this->render(
             'register/show.html.twig',
             ['register' => $register]
+        );
+    }
+
+    /**
+     * Create action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/create",
+     *     methods={"GET", "POST"},
+     *     name="register_create",
+     * )
+     */
+    public function create(Request $request): Response
+    {
+        $register = new Register();
+        $form = $this->createForm(RegisterType::class, $register);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $register->setAuthor($this->getUser());
+            $this->registerService->save($register);
+            $this->addFlash('success', 'message_created_successfully');
+
+            return $this->redirectToRoute('register_index');
+        }
+
+        return $this->render(
+            'register/create.html.twig',
+            ['form' => $form->createView()]
+        );
+    }
+
+    /**
+     * Edit action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Register                      $register Register entity
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/edit",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="register_edit",
+     * )
+     */
+    public function edit(Request $request, Register $register): Response
+    {
+        if ($register->getAuthor() !== $this->getUser()) {
+            $this->addFlash('warning', 'message_item_not_found');
+
+            return $this->redirectToRoute('register_index');
+        }
+        $form = $this->createForm(RegisterType::class, $register, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->registerService->save($register);
+            $this->addFlash('success', 'message_updated_successfully');
+
+            return $this->redirectToRoute('register_index');
+        }
+
+        return $this->render(
+            'register/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'register' => $register,
+            ]
+        );
+    }
+
+    /**
+     * Delete action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Register                      $register Register entity
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/delete",
+     *     methods={"GET", "DELETE"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="register_delete",
+     * )
+     */
+    public function delete(Request $request, Register $register, Category $category): Response
+    {
+        if ($register->getAuthor() !== $this->getUser()) {
+            $this->addFlash('warning', 'message_item_not_found');
+
+            return $this->redirectToRoute('register_index');
+        }
+        if ($category->getTasks()->count()) {
+            $this->addFlash('warning', 'message_category_contains_tasks');
+
+            return $this->redirectToRoute('category_index');
+        }
+
+        $form = $this->createForm(FormType::class, $register, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->registerService->delete($register);
+            $this->addFlash('success', 'message_deleted_successfully');
+
+            return $this->redirectToRoute('register_index');
+        }
+
+        return $this->render(
+            'register/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'register' => $register,
+            ]
         );
     }
 }

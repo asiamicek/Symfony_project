@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Register;
+use \App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
@@ -60,4 +62,103 @@ class RegisterRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * Save record.
+     *
+     * @param \App\Entity\Register $register Register entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Register $register): void
+    {
+        $this->_em->persist($register);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete record.
+     *
+     * @param \App\Entity\Register $register Register entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Register $register): void
+    {
+        $this->_em->remove($register);
+        $this->_em->flush();
+    }
+
+    /**
+     * Query all records.
+     *
+     * @param array $filters Filters array
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function queryAll(array $filters = []): QueryBuilder
+    {
+        $queryBuilder = $this->getOrCreateQueryBuilder()
+            ->select(
+                'partial register.{id, title}',
+                'partial category.{id, title}',
+
+            )
+            ->join('register.category', 'category')
+            ->orderBy('register.id', 'DESC');
+        $queryBuilder = $this->applyFiltersToList($queryBuilder, $filters);
+
+        return $queryBuilder;
+    }
+
+
+    /**
+     * Query register by author.
+     *
+     * @param \App\Entity\User $user    User entity
+     * @param array            $filters Filters array
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function queryByAuthor(User $user, array $filters = []): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll($filters);
+        $queryBuilder->andWhere('register.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
+
+    /**
+     * Apply filters to paginated list.
+     *
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder Query builder
+     * @param array                      $filters      Filters array
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('register');
+    }
+
+
 }

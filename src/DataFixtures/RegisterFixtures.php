@@ -25,6 +25,8 @@ class RegisterFixtures extends AbstractBaseFixtures implements DependentFixtureI
             $register = new Register();
             $register->setTitle($this->faker->word);
             $register->setCategory($this->getRandomReference('categories'));
+            $register->setAuthor($this->getRandomReference('users'));
+
             return $register;
         });
 
@@ -38,6 +40,6 @@ class RegisterFixtures extends AbstractBaseFixtures implements DependentFixtureI
      */
     public function getDependencies(): array
     {
-        return [CategoryFixtures::class];
+        return [CategoryFixtures::class, UserFixtures::class];
     }
 }

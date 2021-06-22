@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Notes list
+    {{ 'title_note_index'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>Notes list</h1>
+    <h1>{{ 'note_index'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
+
+        <button>
+            <a href="{{ url('note_create') }}">
+                {{ 'action_create'|trans }}
+            </a>
+        </button>
 
     <div class="navigation text-center">
         {{ knp_pagination_render(pagination) }}
@@ -18,9 +24,12 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'note.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_title'|trans, 'note.title') }}</th>
+                <th>{{ 'label_author'|trans }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_created_at'|trans, 'note.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_updated_at'|trans, 'note.updatedAt') }}</th>
+
                 <th>{{ 'label_category'|trans }}</th>
+                <th>{{ 'label_tags'|trans }}</th>
                 <th>{{ 'label_actions'|trans }}</th>
             </tr>
             </thead>
@@ -29,12 +38,32 @@
                 <tr>
                     <td>{{ note.id }}</td>
                     <td>{{ note.title }}</td>
+                    <td>{{ note.author.email }}</td>
                     <td>{{ note.createdAt|date('Y/m/d') }}</td>
                     <td>{{ note.updatedAt|date('Y/m/d') }}</td>
-                    <td>{{ note.category.category_name }}</td>
+                    <td><a href="{{ url('note_index', {'filters_category_id' : note.category.id}) }}" title="{{ note.category.title }}">
+                        {{ note.category.title }}</a>
+                    </td>
                     <td>
-                        <a href="{{ url('note_show', {id: note.id}) }}" title="View content">
-                            View content
+                        {% if note.tags is defined and note.tags|length %}
+                            {% for tag in note.tags %}
+                                <a href="{{ url('note_index', {'filters_tags_id' : tag.id}) }}" title="{{ tag.title }}">
+                                    {{ tag.title }}
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url('note_show', {id: note.id}) }}" title="{{ 'action_show'|trans }}">
+                            {{ 'action_show'|trans }}
+                        </a>
+                        <a href="{{ url('note_edit', {id: note.id}) }}" title="{{ 'action_edit'|trans }}">
+                            {{ 'action_edit'|trans }}
+                        </a>
+                        <a href="{{ url('note_delete', {id: note.id}) }}" title="{{ 'action_delete'|trans }}">
+                            {{ 'action_delete'|trans }}
                         </a>
                     </td>
                 </tr>
@@ -46,7 +75,7 @@
         </div>
     {% else %}
         <p>
-            Empty list!
+            {{ 'message_empty_list'|trans }}
         </p>
     {% endif %}
 {% endblock %}

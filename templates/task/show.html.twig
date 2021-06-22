@@ -9,35 +9,30 @@
     {% if task is defined and task|length %}
         <table class="table table-striped">
             <tr>
-                <th>Id</th>
+                <th>{{ 'label_id'|trans }}</th>
                 <td>{{ task.id }}</td>
             </tr>
             <tr>
-                <th>Created at</th>
-                <td>{{ task.createdAt }}</td>
-            </tr>
-
-            <tr>
-                <th>Content</th>
+                <th>{{ 'label_content'|trans }}</th>
                 <td>{{ task.content }}</td>
             </tr>
             <tr>
-                <th>Priority</th>
+                <th>{{ 'label_priority'|trans }}</th>
                 <td>{{ task.priority }}</td>
             </tr>
             <tr>
-                <th>Deadline</th>
-                <td>{{ task.deadline }}</td>
+                <th>{{ 'label_deadline'|trans }}</th>
+                <td>{{ task.deadline|date('Y/m/d') }}</td>
             </tr>
 
     {% else %}
         <p>
-            Record not found.
+            {{ 'message_no_record'|trans }}
         </p>
     {% endif %}
         <p>
-            <a href="{{url('task_index') }}" title="Back to the list">
-                back to the list
+            <a href="{{ url('task_index', {'filters_register_id' : task.register.id}) }}" title="{{ 'action_back_to_list'|trans }}">
+                {{ 'action_back_to_list'|trans }}
             </a>
         </p>
 {% endblock %}

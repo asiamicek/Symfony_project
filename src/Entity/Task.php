@@ -6,13 +6,16 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
-use Doctrine\ORM\Mapping as ORM;
 use DateTimeInterface;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Task.
- *
  *
  * @ORM\Entity(repositoryClass=TaskRepository::class)
  * @ORM\Table(name="tasks")
@@ -20,6 +23,8 @@ use DateTimeInterface;
 class Task
 {
     /**
+     * Primary key.
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -27,25 +32,49 @@ class Task
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * Content.
+     *
+     * @ORM\Column(type="string", length=70)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="3",
+     *     max="70",
+     * )
      */
     private string $content;
 
     /**
+     * Priority.
+     *
+     * @var int
+     *
      * @ORM\Column(type="integer")
+     *
+     * @Assert\Type(type="integer")
+     * @Assert\NotBlank
+     * @Assert\Regex("/^[1-5]$/")
      */
     private $priority;
 
     /**
+     * Deadline.
+     *
+     * @var DataTimeInterface
+     *
      * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
+     *
+     * @Assert\Type(type="\DateTimeInterface")
      */
     private $deadline;
-    
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Register::class, inversedBy="tasks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $register;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,26 +104,26 @@ class Task
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getDeadline(): ?\DateTimeInterface
+    public function getDeadline(): ?DateTimeInterface
     {
         return $this->deadline;
     }
 
-    public function setDeadline(\DateTimeInterface $deadline): self
+    public function setDeadline(DateTimeInterface $deadline): self
     {
         $this->deadline = $deadline;
+
+        return $this;
+    }
+
+    public function getRegister(): ?Register
+    {
+        return $this->register;
+    }
+
+    public function setRegister(?Register $register): self
+    {
+        $this->register = $register;
 
         return $this;
     }

@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Category list
+    {{ 'title_category_index'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>Category list</h1>
+    <h1>{{ 'category_index'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
-
+        <button>
+            <a href="{{ url('category_create') }}">
+                {{ 'action_create'|trans }}
+            </a>
+        </button>
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
@@ -17,7 +21,7 @@
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'category.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label_title'|trans, 'category.category_name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_title'|trans, 'category.title') }}</th>
                 <th>{{ 'label_actions'|trans }}</th>
             </tr>
             </thead>
@@ -25,11 +29,18 @@
             {% for category in pagination.items %}
                 <tr>
                     <td>{{ category.id }}</td>
-                    <td>{{ category.category_name }}</td>
+                    <td>{{ category.title }}</td>
                     <td>
-                        <a href="{{ url('category_show', {id: category.id}) }}" title="View content">
-                            View content
+                        <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action_edit'|trans }}">
+                            {{ 'action_edit'|trans }}
                         </a>
+
+                        {% if not category.notes|length %}
+                        <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action_delete'|trans }}">
+                            {{ 'action_delete'|trans }}
+                        </a>
+                        {% endif %}
+
                     </td>
                 </tr>
             {% endfor %}
@@ -40,7 +51,7 @@
         </div>
     {% else %}
         <p>
-            Empty list!
+            {{ 'message_empty_list'|trans }}
         </p>
     {% endif %}
 {% endblock %}

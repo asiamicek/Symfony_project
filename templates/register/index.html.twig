@@ -8,6 +8,12 @@
     <h1>Registers</h1>
     {% if pagination is defined and pagination.items|length %}
 
+        <button>
+            <a href="{{ url('register_create') }}">
+                {{ 'action_create'|trans }}
+            </a>
+        </button>
+        <br>
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
@@ -27,11 +33,24 @@
                 <tr>
                     <td>{{ register.id }}</td>
                     <td>{{ register.title }}</td>
-                    <td>{{ register.category.category_name }}</td>
+                    <td><a href="{{ url('register_index', {'filters_category_id' : register.category.id}) }}" title="{{ register.category.title }}">
+                            {{ register.category.title }}
+                        </a></td>
                     <td>
-                        <a href="{{ url('register_show', {id: register.id}) }}" title="View content">
-                            View content
+
+                        <a href="{{ url('task_index', {'filters_register_id' : register.id}) }}" title="{{ register.id }}">
+                            {{ 'action_show'|trans }}
                         </a>
+
+                        <a href="{{ url('register_edit', {id: register.id}) }}" title="{{ 'action_edit'|trans }}">
+                            {{ 'action_edit'|trans }}
+                        </a>
+
+                        {% if not register.tasks|length %}
+                        <a href="{{ url('register_delete', {id: register.id}) }}" title="{{ 'action_delete'|trans }}">
+                            {{ 'action_delete'|trans }}
+                        </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

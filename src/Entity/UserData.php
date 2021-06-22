@@ -1,4 +1,7 @@
 <?php
+/**
+ * UserData entity.
+ */
 
 namespace App\Entity;
 
@@ -6,12 +9,16 @@ use App\Repository\UserDataRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * class UserData.
+ *
  * @ORM\Entity(repositoryClass=UserDataRepository::class)
- * @ORM\Table(name="users_data")
+ * @ORM\Table(name="usersdata")
  */
 class UserData
 {
     /**
+     * Id.
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -19,20 +26,20 @@ class UserData
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=64)
      */
-    private $first_name;
+    private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=128)
      */
-    private $last_name;
+    private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * Getter for id.
+     *
+     * @return int|null id
      */
-    private $email;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -40,37 +47,21 @@ class UserData
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstname;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setFirstName(string $firstname): void
     {
-        $this->first_name = $first_name;
-
-        return $this;
+        $this->firstname = $firstname;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastname;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastname): void
     {
-        $this->last_name = $last_name;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
+        $this->lastname = $lastname;
     }
 }

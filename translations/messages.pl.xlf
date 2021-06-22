@@ -2,6 +2,46 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="pl" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="action_back_to_list">
+                <source>action_back_to_list</source>
+                <target>Powrót do listy</target>
+            </trans-unit>
+            <trans-unit id="action_create">
+                <source>action_create</source>
+                <target>Utwórz</target>
+            </trans-unit>
+            <trans-unit id="action_delete">
+                <source>action_delete</source>
+                <target>Usuń</target>
+            </trans-unit>
+            <trans-unit id="action_edit">
+                <source>action_edit</source>
+                <target>Edytuj</target>
+            </trans-unit>
+            <trans-unit id="action_save">
+                <source>action_save</source>
+                <target>Zapisz</target>
+            </trans-unit>
+            <trans-unit id="action_show">
+                <source>action_show</source>
+                <target>Wyświetl</target>
+            </trans-unit>
+            <trans-unit id="category_create">
+                <source>category_create</source>
+                <target>Utwórz kategorię</target>
+            </trans-unit>
+            <trans-unit id="category_delete">
+                <source>category_delete</source>
+                <target>Usuń kategorię</target>
+            </trans-unit>
+            <trans-unit id="category_edit">
+                <source>category_edit</source>
+                <target>Edytuj kategorię</target>
+            </trans-unit>
+            <trans-unit id="category_index">
+                <source>category_index</source>
+                <target>Kategorie</target>
+            </trans-unit>
             <trans-unit id="label_actions">
                 <source>label_actions</source>
                 <target>Operacje</target>
@@ -14,22 +54,185 @@
                 <source>label_title</source>
                 <target>Tytuł</target>
             </trans-unit>
+            <trans-unit id="label_category">
+                <source>label_category</source>
+                <target>Kategoria</target>
+            </trans-unit>
             <trans-unit id="label_content">
                 <source>label_content</source>
-                <target>Zawartość</target>
+                <target>Treść</target>
+            </trans-unit>
+            <trans-unit id="label_created_at">
+                <source>label_created_at</source>
+                <target>Utworzono</target>
+            </trans-unit>
+            <trans-unit id="label_deadline">
+                <source>label_deadline</source>
+                <target>Deadline</target>
+            </trans-unit>
+            <trans-unit id="label_priority">
+                <source>label_priority</source>
+                <target>Priorytet</target>
+            </trans-unit>
+            <trans-unit id="label_reg_id">
+                <source>label_reg_id</source>
+                <target>Id listy</target>
             </trans-unit>
             <trans-unit id="label_tags">
                 <source>label_tags</source>
                 <target>Tagi</target>
             </trans-unit>
+            <trans-unit id="label_updated_at">
+                <source>label_updated_at</source>
+                <target>Zaktualizowano</target>
+            </trans-unit>
             <trans-unit id="message_empty_list">
                 <source>message_empty_list</source>
-                <target>Brak elementów listy</target>
+                <target>Pusta lista</target>
+            </trans-unit>
+            <trans-unit id="message_no_record">
+                <source>message_no_record</source>
+                <target>Brak rekordu</target>
+            </trans-unit>
+            <trans-unit id="note_create">
+                <source>note_create</source>
+                <target>Utwórz notatkę</target>
+            </trans-unit>
+            <trans-unit id="note_delete">
+                <source>note_delete</source>
+                <target>Usuń notatkę</target>
+            </trans-unit>
+            <trans-unit id="note_details">
+                <source>note_details</source>
+                <target>Szczegóły notatki</target>
+            </trans-unit>
+            <trans-unit id="note_edit">
+                <source>note_edit</source>
+                <target>Edytuj notatkę</target>
+            </trans-unit>
+            <trans-unit id="note_index">
+                <source>note_index</source>
+                <target>Notatki</target>
+            </trans-unit>
+            <trans-unit id="register_create">
+                <source>register_create</source>
+                <target>Utwórz listę zadań</target>
+            </trans-unit>
+            <trans-unit id="register_delete">
+                <source>register_delete</source>
+                <target>Usuń listę zadań</target>
+            </trans-unit>
+            <trans-unit id="register_edit">
+                <source>register_edit</source>
+                <target>Edytuj listę zadań</target>
+            </trans-unit>
+            <trans-unit id="register_index">
+                <source>register_index</source>
+                <target>Listy zadań</target>
+            </trans-unit>
+            <trans-unit id="task_create">
+                <source>task_create</source>
+                <target>Utwórz zadanie</target>
+            </trans-unit>
+            <trans-unit id="task_delete">
+                <source>task_delete</source>
+                <target>Usuń zadanie</target>
+            </trans-unit>
+            <trans-unit id="task_details">
+                <source>task_details</source>
+                <target>Szczegóły zadania</target>
+            </trans-unit>
+            <trans-unit id="task_edit">
+                <source>task_edit</source>
+                <target>Edytuj zadanie</target>
+            </trans-unit>
+            <trans-unit id="task_index">
+                <source>task_index</source>
+                <target>Zadania</target>
+            </trans-unit>
+            <trans-unit id="title_category_create">
+                <source>title_category_create</source>
+                <target>Tworzenie kategorii</target>
+            </trans-unit>
+            <trans-unit id="title_category_delete">
+                <source>title_category_delete</source>
+                <target>Usuwanie kategorii</target>
+            </trans-unit>
+            <trans-unit id="title_category_index">
+                <source>title_category_index</source>
+                <target>Kategorie</target>
+            </trans-unit>
+            <trans-unit id="title_category_edit">
+                <source>title_category_edit</source>
+                <target>Edycja kategorii</target>
             </trans-unit>
             <trans-unit id="title_record_list">
                 <source>title_record_list</source>
-                <target>Lista Rekordów</target>
+                <target>Lista rekordów</target>
             </trans-unit>
+            <trans-unit id="title_note_create">
+                <source>title_note_create</source>
+                <target>Tworzenie notatki</target>
+            </trans-unit>
+            <trans-unit id="title_note_delete">
+                <source>title_note_delete</source>
+                <target>Usuwanie notatki</target>
+            </trans-unit>
+            <trans-unit id="title_note_details">
+                <source>title_note_details</source>
+                <target>Szczegóły notatki</target>
+            </trans-unit>
+            <trans-unit id="title_note_edit">
+                <source>title_note_edit</source>
+                <target>Edycja notatki</target>
+            </trans-unit>
+            <trans-unit id="title_note_index">
+                <source>title_note_index</source>
+                <target>Notatki</target>
+            </trans-unit>
+            <trans-unit id="title_register_create">
+                <source>title_register_create</source>
+                <target>Tworzenie listy</target>
+            </trans-unit>
+            <trans-unit id="title_register_delete">
+                <source>title_register_delete</source>
+                <target>Usuwanie listy</target>
+            </trans-unit>
+            <trans-unit id="title_register_edit">
+                <source>title_register_edit</source>
+                <target>Edycja listy</target>
+            </trans-unit>
+            <trans-unit id="title_register_index">
+                <source>title_register_index</source>
+                <target>Listy zadań</target>
+            </trans-unit>
+            <trans-unit id="title_task_create">
+                <source>title_task_create</source>
+                <target>Tworzenie zadania</target>
+            </trans-unit>
+            <trans-unit id="title_task_delete">
+                <source>title_task_delete</source>
+                <target>Usuwanie zadania</target>
+            </trans-unit>
+            <trans-unit id="title_task_details">
+                <source>title_task_details</source>
+                <target>Szczegóły zadania</target>
+            </trans-unit>
+            <trans-unit id="title_task_edit">
+                <source>title_task_edit</source>
+                <target>Edycja zadania</target>
+            </trans-unit>
+            <trans-unit id="title_task_index">
+                <source>title_task_index</source>
+                <target>Zadania</target>
+            </trans-unit>
+
+
+
+
+
+
+
         </body>
     </file>
 </xliff>

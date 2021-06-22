@@ -6,14 +6,22 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @ORM\Table(name="categories")
+ *
+ * @UniqueEntity(fields={"title"})
  */
 class Category
 {
     /**
+     * Primary key.
+     *
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -21,9 +29,20 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * Title.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", length=64)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min="3",
+     *     max="64",
+     * )
      */
-    private $category_name;
+    private $title;
 
     /**
      * @ORM\OneToMany(targetEntity=Note::class, mappedBy="category")
@@ -46,14 +65,14 @@ class Category
         return $this->id;
     }
 
-    public function getcategory_name(): ?string
+    public function getTitle(): ?string
     {
-        return $this->category_name;
+        return $this->title;
     }
 
-    public function setCategoryName(string $category_name): self
+    public function setTitle(string $title): self
     {
-        $this->category_name = $category_name;
+        $this->title = $title;
 
         return $this;
     }

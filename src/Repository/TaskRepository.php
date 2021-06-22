@@ -1,14 +1,27 @@
 <?php
+/**
+ * Task repository.
+ */
 
 namespace App\Repository;
 
 use App\Entity\Task;
+use App\Entity\Register;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 
 /**
  * Class TaskRepository.
+ *
+ * @method Task|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Task|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Task[]    findAll()
+ * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TaskRepository
+class TaskRepository extends ServiceEntityRepository
 {
     /**
      * Items per page.
@@ -19,105 +32,121 @@ class TaskRepository
      *
      * @constant int
      */
-    const PAGINATOR_ITEMS_PER_PAGE = 3;
+    const PAGINATOR_ITEMS_PER_PAGE = 10;
+
+
+
+//    /**
+//     * TaskRepository constructor.
+//     *
+//     * @param \Doctrine\Common\Persistence\ManagerRegistry $registry Manager registry
+//     */
+//    public function __construct(ManagerRegistry $registry)
+//    {
+//        parent::__construct($registry, Task::class);
+//    }
+
 
     /**
-     * Data.
+     * TaskRepository constructor.
      *
-     * @var array
+     * @param \Doctrine\Common\Persistence\ManagerRegistry $registry Manager registry
      */
-    private $data = [
-        1 => [
-            'id' => 1,
-            'content' => 'Pick up a kitten from the cat`s kindergarten and buy him a treat.',
-            'priority' => 3,
-            'createdAt'=> '18-04-2021',
-            'deadline' => '19-04-2021',
-        ],
-        2 => [
-            'id' => 2,
-            'content' => 'Buy diesel fuel and replace the coolant.',
-            'priority' => 1,
-            'createdAt'=> '10-02-2021',
-            'deadline' => '27-06-2021',
-        ],
-        3 => [
-            'id' => 3,
-            'content' => 'Bake an apple pie for Grandma`s visit.',
-            'priority' => 5,
-            'createdAt'=> '16-04-2021',
-            'deadline' => '21-05-2021',
-        ],
-        4 => [
-            'id' => 4,
-            'content' => 'To pack a baby for an educational trip.',
-            'priority' => 2,
-            'createdAt'=> '01-04-2021',
-            'deadline' => '21-05-2021',
-        ],
-        5 => [
-            'id' => 5,
-            'content' => 'Wash uncle Kazio`s car.',
-            'priority' => 1,
-            'createdAt'=> '11-05-2021',
-            'deadline' => '26-05-2021',
-        ],
-        6 => [
-            'id' => 6,
-            'content' => 'Write an essay on the influence of spaghetti on ancient culture.',
-            'priority' => 5,
-            'createdAt'=> '16-04-2021',
-            'deadline' => '31-05-2021',
-        ],
-        7 => [
-            'id' => 7,
-            'content' => 'Paint a picture of Vangogh in the bathtub.',
-            'priority' => 3,
-            'createdAt'=> '06-01-2021',
-            'deadline' => '21-06-2021',
-        ],
-        8 => [
-            'id' => 8,
-            'content' => 'Install new extensions for the Sims.',
-            'priority' => 2,
-            'createdAt'=> '11-03-2021',
-            'deadline' => '24-07-2021',
-        ],
-        9 => [
-            'id' => 9,
-            'content' => 'Sell Opel fast and expensive.',
-            'priority' => 1,
-            'createdAt'=> '15-04-2021',
-            'deadline' => '02-06-2021',
-        ],
-        10 => [
-            'id' => 10,
-            'content' => 'Choose a dress and shoes for a date with John.',
-            'priority' => 4,
-            'createdAt'=> '06-02-2021',
-            'deadline' => '20-05-2021',
-        ],
-    ];
-    /**
-     * Find all.
-     *
-     * @return array Result
-     */
-    public function findAll(): array
+    public function __construct(ManagerRegistry $registry)
     {
-        return $this->data;
+        parent::__construct($registry, Task::class);
+    }
+    /**
+     * Query all records.
+     * @param array $filters
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    public function queryAll(array $filters = []): QueryBuilder
+    {
+        $queryBuilder = $this->getOrCreateQueryBuilder()
+            ->select(
+                'partial task.{id, content, priority, deadline}',
+                'partial register.{id, title}'
+            )
+            ->join('task.register', 'register')
+            ->orderBy('task.deadline', 'DESC');
+        $queryBuilder = $this->applyFiltersToList($queryBuilder, $filters);
+
+//        if(array_key_exists('register_id',$filters) && $filters['register_id'] > 0 ) {
+//            $qb->where('task.register = :register_id')
+//                ->setParameter('register_id', $filters ['register_id']);
+//        }
+
+
+        return $queryBuilder;
+    }
+
+//    /**
+//     * Query tasks by register.
+//     *
+//     * @param \App\Entity\Register $register    Register entity
+//     * @param array            $filters Filters array
+//     *
+//     * @return \Doctrine\ORM\QueryBuilder Query builder
+//     */
+//    public function queryByRegister(array $filters = []): QueryBuilder
+//    {
+//        $queryBuilder = $this->queryAll($filters);
+//
+//        $queryBuilder->andWhere('task.register = :register')
+//            ->setParameter('register', $register);
+//
+//        return $queryBuilder;
+//    }
+
+    /**
+     * Apply filters to paginated list.
+     *
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder Query builder
+     * @param array                      $filters      Filters array
+     *
+     * @return \Doctrine\ORM\QueryBuilder Query builder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['register']) && $filters['register'] instanceof Register) {
+            $queryBuilder->andWhere('register = :register')
+                ->setParameter('register', $filters['register']);
+        }
+
+        return $queryBuilder;
     }
 
     /**
-     * Find one by Id.
+     * Get or create new query builder.
      *
-     * @param int $id Id
+     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
      *
-     * @return array|null Result
+     * @return \Doctrine\ORM\QueryBuilder Query builder
      */
-    public function findById(int $id): ?array
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return isset($this->data[$id]) && count($this->data)
-            ? $this->data[$id] : null;
+        return $queryBuilder ?? $this->createQueryBuilder('task');
+    }
+
+    public function save(Task $task): void
+    {
+        $this->_em->persist($task);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete record.
+     *
+     * @param \App\Entity\Task $task Task entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Task $task): void
+    {
+        $this->_em->remove($task);
+        $this->_em->flush();
     }
 }
+

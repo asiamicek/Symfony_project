@@ -22,7 +22,7 @@ class CategoryFixtures extends AbstractBaseFixtures
     {
         $this->createMany(10, 'categories', function ($i) {
             $category = new Category();
-            $category->setCategoryName($this->faker->word);
+            $category->setTitle($this->faker->word);
             return $category;
         });
 

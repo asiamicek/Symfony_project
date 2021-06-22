@@ -1,43 +1,66 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Tasks list
+    {{ 'title_task_index'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>Tasks list</h1>
-    {% if tasks is defined and tasks|length %}
+    <h1>{{ 'task_index'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+       <button>
+            <a href="{{ url('/task/create/{id_register}', {id_register: task.register}) }}">
+                {{ 'action_create'|trans }}
+            </a>
+       </button>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Created at</th>
-                <th>Content</th>
-                <th>Priority</th>
-                <th>Deadline</th>
-                <th>Actions</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'task.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_reg_id'|trans, 'task.register.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_content'|trans, 'task.content') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_priority'|trans, 'task.priority') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_deadline'|trans, 'task.deadline') }}</th>
+                <th>{{ 'label_actions'|trans }}</th>
             </tr>
             </thead>
             <tbody>
-            {% for task in tasks %}
+            {% for task in pagination.items %}
                 <tr>
                     <td>{{ task.id }}</td>
-                    <td>{{ task.createdAt }}</td>
+                    <td>{{ task.register.id }}</td>
                     <td>{{ task.content }}</td>
                     <td>{{ task.priority }}</td>
-                    <td>{{ task.deadline }}</td>
+                    <td>{{ task.deadline|date('Y/m/d') }}</td>
+
                     <td>
-                        <a href="{{ url('task_show', {id: task.id}) }}" title="Read more">
-                            Read more
+                        <a href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action_show'|trans }}">
+                            {{ 'action_show'|trans }}
+                        </a>
+                        <a href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action_edit'|trans }}">
+                            {{ 'action_edit'|trans }}
+                        </a>
+                        <a href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action_delete'|trans }}">
+                            {{ 'action_delete'|trans }}
                         </a>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
     {% else %}
         <p>
-            Empty list!
+            {{ 'message_empty_list'|trans }}
         </p>
     {% endif %}
 {% endblock %}

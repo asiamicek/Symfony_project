@@ -1,13 +1,17 @@
 body{
 
 }
+form{
+    margin-right: 25px;
+}
 .container-fluid{
 
     width: 80%;
     margin-left: 20vw;
+    margin-right: 300px;
     vertical-align: top;
     padding-left: 1vw;
-    padding-right: 0;
+    padding-right: 25px;
     padding-top: 10px;
 }
 header{
