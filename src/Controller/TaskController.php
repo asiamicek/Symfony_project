@@ -8,6 +8,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Entity\User;
 use App\Form\TaskType;
+use App\Repository\TaskRepository;
 use App\Service\TaskService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -102,7 +103,7 @@ class TaskController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param User $user
+     * @param \Symfony\Component\Security\Core\User\UserInterface $user
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
@@ -115,7 +116,7 @@ class TaskController extends AbstractController
      *     name="task_create",
      * )
      */
-    public function create(Request $request, User $user): Response
+    public function create(Request $request): Response
     {
 //        $form = $this->createForm(TaskType::class, $task, ['method' => 'PUT']);
 //        $form->handleRequest($request);

@@ -168,5 +168,28 @@ class TaskRepository extends ServiceEntityRepository
         $this->_em->remove($task);
         $this->_em->flush();
     }
+
+
+//    /**
+//     * @param Task $task
+//     * @return $this
+//     */
+//    public function getAuth(Task $task):void
+//    {
+//        $this->$task->getRegister()->getAuthor();
+//    }
+
+
+//        $this->getEntityManager()->createQueryBuilder();
+//        $queryBuilder
+//            ->select(['register.title'])
+//            ->from(Register::class, 'register')
+//            ->andWhere('register.author = :user')
+//            ->setParameter('user', $user);
+//
+//        $result = $queryBuilder->getQuery()->getResult();
+//
+//        return $result;
+//    }
 }
 

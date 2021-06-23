@@ -132,12 +132,9 @@ class RegisterService
         return $this->registerRepository->findOneById($id);
     }
 
-    /**
-     * Find title by autor.
-     * @return \App\Entity\Register|null Register entity
-     */
-    public function TitleByAuthor(User $user)
+
+    public function findByAuthor(User $user)
     {
-        return $this->registerRepository->TitleByAuthor($user);
+        return $this->registerRepository->findByAuthor($user);
     }
 }

@@ -38,6 +38,19 @@ class TaskType extends AbstractType
         $this->taskService = $taskService;
     }
 
+    private function prepareRegistersForChoices(): array
+    {
+        $registers = $this->$this->registerService->findByAuthor($this->user);
+        $choices = [];
+
+        foreach ($registers as $register) {
+            $choices[$register->getId()] = $register->getTitle();
+        }
+
+        return $choices;
+
+    }
+
     /**
      * Builds the form.
      *
@@ -57,10 +70,13 @@ class TaskType extends AbstractType
             EntityType::class,
             [
                 'class' => Register::class,
-                'choices' => $this->registerService->TitleByAuthor($options['user']),
+                'choices' => $this->prepareRegistersForChoices(),
                 'label' => 'label_register',
                 'placeholder' => 'label_none',
                 'required' => true,
+//                'choice_label' => function ($register) {
+//                return $register->getTitle();
+
             ]
         );
 
@@ -73,9 +89,7 @@ class TaskType extends AbstractType
 //                        ->setParameter('user', $options['user']);
 //                },
 ////                'choices' => $options,
-//                'choice_label' => function ($register) {
-//                    return $register->getTitle();
-//                },
+
 //                    function ($registerService, $user) {
 //                    $queryBuilder = $this->createQueryBuilder();
 //                    $queryBuilder

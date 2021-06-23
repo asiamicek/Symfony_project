@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Register;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -173,23 +174,38 @@ class RegisterRepository extends ServiceEntityRepository
 
     /**
      * @param User $user
-     * @return int|mixed|string|object
+     * @return Collection|null
      */
-    public function TitleByAuthor(User $user)
+    public function findByAuthor(User $user): ?Collection
     {
 
-        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
-        $queryBuilder
-            ->select(['register.title'])
-            ->from(Register::class, 'register')
+        $queryBuilder = $this->getOrCreateQueryBuilder()
             ->andWhere('register.author = :user')
             ->setParameter('user', $user);
 
-        $result = $queryBuilder->getQuery()->getResult();
-
-        return $result;
+        return $queryBuilder->getQuery()->getResult();
 
     }
+
+//    /**
+//     * @param User $user
+//     * @return int|mixed|string|object
+//     */
+//    public function TitleByAuthor(User $user)
+//    {
+//
+//        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+//        $queryBuilder
+//            ->select(['register.title'])
+//            ->from(Register::class, 'register')
+//            ->andWhere('register.author = :user')
+//            ->setParameter('user', $user);
+//
+//        $result = $queryBuilder->getQuery()->getResult();
+//
+//        return $result;
+//
+//    }
 
 //        $result = $queryBuilder->getQuery()->getResult();
 //
