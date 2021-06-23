@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class User
+ *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(
  *     name="users",
@@ -89,14 +91,20 @@ class User implements UserInterface
 
      * @Assert\NotBlank
      * @Assert\Type(type="string")
-     * @SecurityAssert\UserPassword
      */
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity=UserData::class, cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=64)
      */
-    private $userdata;
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $lastname;
+
+    
 
     /**
      * Getter for the Id.
@@ -189,6 +197,8 @@ class User implements UserInterface
     }
 
     /**
+     * Getter for salt.
+     *
      * @see UserInterface
      */
     public function getSalt()
@@ -205,14 +215,26 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getUserdata(): ?UserData
+    public function getFirstname(): ?string
     {
-        return $this->userdata;
+        return $this->firstname;
     }
 
-    public function setUserdata(?UserData $userdata): self
+    public function setFirstname(string $firstname): self
     {
-        $this->userdata = $userdata;
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }

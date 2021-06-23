@@ -1,4 +1,7 @@
 <?php
+/**
+ * Note entity.
+ */
 
 namespace App\Entity;
 
@@ -8,14 +11,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class Note.
+ *
  * @ORM\Entity(repositoryClass=NoteRepository::class)
  * @ORM\Table(name="notes")
- *
- *
  */
 class Note
 {
@@ -85,7 +87,10 @@ class Note
     private $updatedAt;
 
     /**
+     * Category.
+     *
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="notes")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -107,89 +112,126 @@ class Note
      * @var \App\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
+    /**
+     * Note constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Content.
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    /**
+     * Setter for Content.
+     *
+     * @return $this
+     */
+    public function setContent(string $content): void
     {
         $this->content = $content;
-
-        return $this;
     }
 
+    /**
+     * Getter for Title.
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    /**
+     * Setter for Title.
+     *
+     * @return $this
+     */
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
+     * Getter for Created At.
+     *
      * @return DateTime|null
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    /**
+     * Setter for Created At.
+     *
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
+     * Getter for Updated At.
+     *
      * @return \DateTime|null
      *
      * @var \DateTime|null
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * Setter for Updated At.
+     *
+     * @return $this
+     */
+    public function setUpdatedAt(DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
+    /**
+     * Getter for Category.
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    /**
+     * Setter for Category.
+     *
+     * @return $this
+     */
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
-
-        return $this;
     }
 
     /**
+     * Getter for Tags.
+     *
      * @return Collection|Tag[]
      */
     public function getTags(): Collection
@@ -197,31 +239,45 @@ class Note
         return $this->tags;
     }
 
-    public function addTag(Tag $tag): self
+    /**
+     * Add Tag.
+     *
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag): void
     {
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
         }
-
-        return $this;
     }
 
-    public function removeTag(Tag $tag): self
+    /**
+     * Remove Tag.
+     *
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag): void
     {
         $this->tags->removeElement($tag);
-
-        return $this;
     }
 
+    /**
+     * Getter for Author.
+     *
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * Setter for Author.
+     *
+     * @param User|null $author
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 }

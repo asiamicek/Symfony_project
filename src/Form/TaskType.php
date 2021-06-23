@@ -5,8 +5,12 @@
 
 namespace App\Form;
 
-use App\Entity\Task;
 use App\Entity\Register;
+use App\Entity\Task;
+use App\Entity\User;
+use App\Repository\RegisterRepository;
+use App\Service\RegisterService;
+use App\Service\TaskService;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -14,12 +18,26 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class TaskType.
  */
 class TaskType extends AbstractType
 {
+    private RegisterService $registerService;
+    private TaskService $taskService;
+    private UserInterface $user;
+
+    /**
+     * TaskType constructor.
+     */
+    public function __construct(RegisterService $registerService, TaskService $taskService)
+    {
+        $this->registerService = $registerService;
+        $this->taskService = $taskService;
+    }
+
     /**
      * Builds the form.
      *
@@ -33,21 +51,49 @@ class TaskType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $this->user = $options['user'];
         $builder->add(
             'register',
             EntityType::class,
             [
                 'class' => Register::class,
-//                'choice_label' => function ($register) {
-//
-//
-//                    return $register->getTitle('task.register');
-//                },
+                'choices' => $this->registerService->TitleByAuthor($options['user']),
                 'label' => 'label_register',
-//                'placeholder' => 'label_none',
+                'placeholder' => 'label_none',
                 'required' => true,
             ]
         );
+
+
+//                'query_builder' => function (RegisterRepository $registerRepository, $options){
+//                    return $registerRepository->createQueryBuilder('gv')
+//                        ->select(['register.title'])
+//                        ->from(Register::class, 'register')
+//                        ->andWhere('register.author == :user')
+//                        ->setParameter('user', $options['user']);
+//                },
+////                'choices' => $options,
+//                'choice_label' => function ($register) {
+//                    return $register->getTitle();
+//                },
+//                    function ($registerService, $user) {
+//                    $queryBuilder = $this->createQueryBuilder();
+//                    $queryBuilder
+//                        ->select(['register.title'])
+//                        ->from(Register::class, 'register')
+//                        ->andWhere($queryBuilder->expr()->like('register.author', ':user'))
+//                        ->setParameter('user', $user);
+//
+//                    $result = $queryBuilder->getQuery()->getResult();
+//
+//                    return $result;
+////
+///                     if('register.author = :user')
+////                        ->setParameter('author', $user);
+//                    return $registerService->TitleByAuthor($user);
+
+
+
         $builder->add(
             'content',
             TextType::class,
@@ -84,7 +130,12 @@ class TaskType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Task::class]);
+        $resolver->setDefaults(
+            [
+                'data_class' => Task::class,
+                'user' => null,
+            ]
+        );
     }
 
     /**

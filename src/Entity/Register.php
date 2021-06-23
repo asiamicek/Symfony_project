@@ -1,4 +1,7 @@
 <?php
+/**
+ * Register entity.
+ */
 
 namespace App\Entity;
 
@@ -12,6 +15,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
+ * Class register.
+ *
  * @ORM\Entity(repositoryClass=RegisterRepository::class)
  * @ORM\Table(name="registers")
  *
@@ -47,57 +52,91 @@ class Register
     private $title;
 
     /**
+     * Category.
+     *
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="registers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
 
     /**
+     * Tasks.
+     *
      * @ORM\OneToMany(targetEntity=Task::class, mappedBy="register")
      */
     private $tasks;
 
     /**
+     * Author.
+     *
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
+    /**
+     * Register constructor.
+     */
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
     }
 
+    /**
+     * Getter for Int.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Title.
+     *
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    /**
+     * Setter for Title.
+     *
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
+    /**
+     * Getter for Category.
+     *
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    /**
+     * Setter for Category.
+     *
+     * @param Category|null $category
+     * @return $this
+     */
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
-
-        return $this;
     }
 
     /**
+     * Getter for Task.
+     *
      * @return Collection|Task[]
      */
     public function getTasks(): Collection
@@ -105,17 +144,25 @@ class Register
         return $this->tasks;
     }
 
-    public function addTask(Task $task): self
+    /**
+     * Add Task.
+     *
+     * @param Task $task
+     */
+    public function addTask(Task $task): void
     {
         if (!$this->tasks->contains($task)) {
             $this->tasks[] = $task;
             $task->setRegister($this);
         }
-
-        return $this;
     }
 
-    public function removeTask(Task $task): self
+    /**
+     * Remove Task.
+     *
+     * @param Task $task
+     */
+    public function removeTask(Task $task): void
     {
         if ($this->tasks->removeElement($task)) {
             // set the owning side to null (unless already changed)
@@ -123,19 +170,27 @@ class Register
                 $task->setRegister(null);
             }
         }
-
-        return $this;
     }
 
+    /**
+     * Getter for Author.
+     *
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    /**
+     * Setter for Author.
+     *
+     * @param User|null $author
+     */
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
+
+
 }

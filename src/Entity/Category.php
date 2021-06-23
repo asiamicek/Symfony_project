@@ -1,4 +1,7 @@
 <?php
+/**
+ * Category entity.
+ */
 
 namespace App\Entity;
 
@@ -10,6 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class category.
+ *
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @ORM\Table(name="categories")
  *
@@ -45,39 +50,57 @@ class Category
     private $title;
 
     /**
+     * Notes.
+     *
      * @ORM\OneToMany(targetEntity=Note::class, mappedBy="category")
      */
     private $notes;
 
     /**
+     * Registers.
+     *
      * @ORM\OneToMany(targetEntity=Register::class, mappedBy="category")
      */
     private $registers;
 
+    /**
+     * Category constructor.
+     */
     public function __construct()
     {
         $this->notes = new ArrayCollection();
         $this->registers = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter fot Title.
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    /**
+     * Setter for Title.
+     *
+     * @return $this
+     */
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
+     * Getter for Note.
+     *
      * @return Collection|Note[]
      */
     public function getNotes(): Collection
@@ -85,17 +108,25 @@ class Category
         return $this->notes;
     }
 
-    public function addNote(Note $note): self
+    /**
+     * Add Note.
+     *
+     * @return $this
+     */
+    public function addNote(Note $note): void
     {
         if (!$this->notes->contains($note)) {
             $this->notes[] = $note;
             $note->setCategory($this);
         }
-
-        return $this;
     }
 
-    public function removeNote(Note $note): self
+    /**
+     * Remove note.
+     *
+     * @return $this
+     */
+    public function removeNote(Note $note): void
     {
         if ($this->notes->removeElement($note)) {
             // set the owning side to null (unless already changed)
@@ -103,11 +134,11 @@ class Category
                 $note->setCategory(null);
             }
         }
-
-        return $this;
     }
 
     /**
+     * Getter for Register.
+     *
      * @return Collection|Register[]
      */
     public function getRegister(): Collection
@@ -115,17 +146,27 @@ class Category
         return $this->registers;
     }
 
-    public function addRegister(Register $register): self
+    /**
+     * Add register.
+     *
+     * @param Register $register
+     * @return $this
+     */
+    public function addRegister(Register $register): void
     {
         if (!$this->register->contains($register)) {
             $this->register[] = $register;
             $register->setCategory($this);
         }
-
-        return $this;
     }
 
-    public function removeRegister(Register $register): self
+    /**
+     * Remove Register.
+     *
+     * @param Register $register
+     * @return $this
+     */
+    public function removeRegister(Register $register): void
     {
         if ($this->registers->removeElement($register)) {
             // set the owning side to null (unless already changed)
@@ -133,7 +174,5 @@ class Category
                 $register->setCategory(null);
             }
         }
-
-        return $this;
     }
 }

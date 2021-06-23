@@ -6,13 +6,15 @@
 
 {% block body %}
     <h1>{{ 'task_index'|trans }}</h1>
+    <button>
+        <a href="{{ url('task_create') }}">
+            {{ 'action_create'|trans }}
+        </a>
+    </button>
+
     {% if pagination is defined and pagination.items|length %}
 
-       <button>
-            <a href="{{ url('/task/create/{id_register}', {id_register: task.register}) }}">
-                {{ 'action_create'|trans }}
-            </a>
-       </button>
+
 
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}

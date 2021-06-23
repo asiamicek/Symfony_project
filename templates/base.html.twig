@@ -15,18 +15,25 @@
         <img src="{{ asset('image/logo_apka-removebg-preview.png') }}" width:13vw >
         <nav>
             <ul class="vertical-menu">
-                <li><a href="{{ url('register_index') }}" title="Registers">Registers</a></li>
-                <li><a href="{{ url('note_index') }}" title="Notes">Notes</a></li>
-                <li><a href="{{ url('category_index') }}" title="Categories">Categories</a></li>
-                <li><a href="{{ url('tag_index') }}">Tags</a></li>
-                <br>
+
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <li><b style="padding-left: 11px;">{{ app.user.email }}</b></li>
+                    <li><a href="{{ url('register_index') }}" title="Registers">Registers</a></li>
+                    <li><a href="{{ url('note_index') }}" title="Notes">Notes</a></li>
+                    <li><a href="{{ url('category_index') }}" title="Categories">Categories</a></li>
+                    <li><a href="{{ url('tag_index') }}">Tags</a></li>
+                    <br>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ url('user_index') }}">Dane użytkowników</a></li>
+                    {% endif %}
+                    <li><a href="{{ url('user_show',{id: app.user.id}) }}"><b style="padding-left: 11px;">{{ app.user.firstname }}</b>
+                            <br><b style="padding-left: 11px;">{{ app.user.lastname }}</b></a></li>
                     <li><a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a></li>
                 {% else %}
                     <li><a href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a></li>
-                    <li><a href="#" title="sign_up">{{ 'sign_up'|trans }}</a></li>
+                    <li><a href="{{url('registration_signup')}}" title="sign_up">{{ 'sign_up'|trans }}</a></li>
                 {% endif %}
+
+
             </ul>
         </nav>
 {#        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}

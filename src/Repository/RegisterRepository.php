@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Register;
-use \App\Entity\User;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
@@ -90,6 +90,17 @@ class RegisterRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
+//    public function TitleByAuthor(User $user): QueryBuilder
+//    {
+//
+//        $qb = $this-> queryAll($filters)
+//        $qb->andWhere('register.author = :author')
+//            ->setParameter('author', $user);
+//
+//        return $qb;
+//    }
+
+
     /**
      * Query all records.
      *
@@ -160,5 +171,29 @@ class RegisterRepository extends ServiceEntityRepository
         return $queryBuilder ?? $this->createQueryBuilder('register');
     }
 
+    /**
+     * @param User $user
+     * @return int|mixed|string|object
+     */
+    public function TitleByAuthor(User $user)
+    {
+
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+        $queryBuilder
+            ->select(['register.title'])
+            ->from(Register::class, 'register')
+            ->andWhere('register.author = :user')
+            ->setParameter('user', $user);
+
+        $result = $queryBuilder->getQuery()->getResult();
+
+        return $result;
+
+    }
+
+//        $result = $queryBuilder->getQuery()->getResult();
+//
+//        return $result;
+//    }
 
 }

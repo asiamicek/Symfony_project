@@ -7,11 +7,14 @@
 {% block body %}
     <h1>{{ 'category_index'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
+        {% if is_granted('ROLE_ADMIN') %}
         <button>
             <a href="{{ url('category_create') }}">
                 {{ 'action_create'|trans }}
             </a>
         </button>
+        {% endif %}
+
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
@@ -22,7 +25,9 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'category.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_title'|trans, 'category.title') }}</th>
-                <th>{{ 'label_actions'|trans }}</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>{{ 'label_actions'|trans }}</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -30,6 +35,7 @@
                 <tr>
                     <td>{{ category.id }}</td>
                     <td>{{ category.title }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <td>
                         <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action_edit'|trans }}">
                             {{ 'action_edit'|trans }}
@@ -42,6 +48,7 @@
                         {% endif %}
 
                     </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

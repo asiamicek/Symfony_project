@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ 'title_registration'|trans }}
+{% endblock %}
+
+{% block body %}
+
+    {% include 'default/_form.html.twig' with {
+        page_title: 'Registration',
+        attr: {
+            method: 'POST',
+            action: url('registration_signup')
+        },
+        form: form,
+        submit_label: 'registration'|trans,
+        message: 'message_registration_successfully'|trans,
+        back_to_list_path: 'index',
+    } %}
+{% endblock %}

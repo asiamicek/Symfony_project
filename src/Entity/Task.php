@@ -70,61 +70,104 @@ class Task
     private $deadline;
 
     /**
+     * Register.
+     *
      * @ORM\ManyToOne(targetEntity=Register::class, inversedBy="tasks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $register;
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Content.
+     *
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    /**
+     * Setter for Content.
+     *
+     * @param string $content
+     * @return $this
+     */
+    public function setContent(string $content): void
     {
         $this->content = $content;
-
-        return $this;
     }
 
+    /**
+     * Getter for Priority.
+     *
+     * @return int|null
+     */
     public function getPriority(): ?int
     {
         return $this->priority;
     }
 
-    public function setPriority(int $priority): self
+    /**
+     * Setter for Priority.
+     *
+     * @param int $priority
+     * @return $this
+     */
+    public function setPriority(int $priority): void
     {
         $this->priority = $priority;
-
-        return $this;
     }
 
+    /**
+     * Getter for Deadline.
+     *
+     * @return DateTimeInterface|null
+     */
     public function getDeadline(): ?DateTimeInterface
     {
         return $this->deadline;
     }
 
-    public function setDeadline(DateTimeInterface $deadline): self
+    /**
+     * Setter for Deadline.
+     *
+     * @param DateTimeInterface $deadline
+     * @return $this
+     */
+    public function setDeadline(DateTimeInterface $deadline): void
     {
         $this->deadline = $deadline;
-
-        return $this;
     }
 
+    /**
+     * Getter for Register.
+     *
+     * @return Register|null
+     */
     public function getRegister(): ?Register
     {
         return $this->register;
     }
 
-    public function setRegister(?Register $register): self
+    /**
+     * Setter for Register.
+     *
+     * @param Register|null $register
+     * @return $this
+     */
+    public function setRegister(?Register $register): void
     {
         $this->register = $register;
-
-        return $this;
     }
 }

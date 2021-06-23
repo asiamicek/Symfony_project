@@ -9,20 +9,19 @@ use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-
-
 /**
+ * Class Tag.
+ *
  * @ORM\Entity(repositoryClass=TagRepository::class)
  * @ORM\Table(name="tags")
  */
 class Tag
 {
     /**
+     * Primary key.
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -49,33 +48,54 @@ class Tag
     private $title;
 
     /**
+     * Notes.
+     *
      * @ORM\ManyToMany(targetEntity=Note::class, mappedBy="tags")
      */
     private $notes;
 
+    /**
+     * Tag constructor.
+     */
     public function __construct()
     {
         $this->notes = new ArrayCollection();
     }
 
+    /**
+     * Getter for Id.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Getter for Title.
+     *
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    /**
+     * Setter for Title.
+     *
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
+     * Getter for Notes.
+     *
      * @return Collection|Note[]
      */
     public function getNotes(): Collection
@@ -83,22 +103,30 @@ class Tag
         return $this->notes;
     }
 
-    public function addNote(Note $note): self
+    /**
+     * Add Note.
+     *
+     * @param Note $note
+     * @return $this
+     */
+    public function addNote(Note $note): void
     {
         if (!$this->notes->contains($note)) {
             $this->notes[] = $note;
             $note->addTag($this);
         }
-
-        return $this;
     }
 
-    public function removeNote(Note $note): self
+    /**
+     * Remove Note.
+     *
+     * @param Note $note
+     * @return $this
+     */
+    public function removeNote(Note $note): void
     {
         if ($this->notes->removeElement($note)) {
             $note->removeTag($this);
         }
-
-        return $this;
     }
 }

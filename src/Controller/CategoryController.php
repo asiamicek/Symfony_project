@@ -8,6 +8,8 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Service\CategoryService;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use App\Repository\CategoryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -103,9 +105,12 @@ class CategoryController extends AbstractController
      *     methods={"GET", "POST"},
      *     name="category_create",
      * )
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request): Response
     {
+
+
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -141,7 +146,7 @@ class CategoryController extends AbstractController
      *     name="category_edit",
      * )
      *
-     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Category $category): Response
     {
@@ -182,7 +187,7 @@ class CategoryController extends AbstractController
      *     name="category_delete",
      * )
      *
-     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Category $category): Response
     {

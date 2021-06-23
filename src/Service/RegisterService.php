@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Register;
+use App\Entity\User;
 use App\Repository\RegisterRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -129,5 +130,14 @@ class RegisterService
     public function findOneById(int $id): ?Register
     {
         return $this->registerRepository->findOneById($id);
+    }
+
+    /**
+     * Find title by autor.
+     * @return \App\Entity\Register|null Register entity
+     */
+    public function TitleByAuthor(User $user)
+    {
+        return $this->registerRepository->TitleByAuthor($user);
     }
 }

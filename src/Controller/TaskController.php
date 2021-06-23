@@ -6,6 +6,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Entity\User;
 use App\Form\TaskType;
 use App\Service\TaskService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -101,26 +102,26 @@ class TaskController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     *
+     * @param User $user
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     *
+     * @throws \Symfony\Component\Form\Exception\LogicException
      * @Route(
-     *     "/create/{id_register}",
+     *     "/create",
      *     methods={"GET", "POST"},
-     *     requirements={"id_register": "[1-9]\d*"},
+     *
      *     name="task_create",
      * )
      */
-    public function create(Request $request): Response
+    public function create(Request $request, User $user): Response
     {
 //        $form = $this->createForm(TaskType::class, $task, ['method' => 'PUT']);
 //        $form->handleRequest($request);
 
         $task = new Task();
-        $form = $this->createForm(TaskType::class, $task, ['method' => 'PUT']);
+        $form = $this->createForm(TaskType::class, $task, ['method' => 'PUT', 'user' => $this->getUser()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
