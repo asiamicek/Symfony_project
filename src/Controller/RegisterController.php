@@ -5,7 +5,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Register;
 use App\Form\RegisterType;
 use App\Service\RegisterService;
@@ -27,7 +26,7 @@ class RegisterController extends AbstractController
      *
      * @var \App\Service\RegisterService
      */
-    private $registerService;
+    private RegisterService $registerService;
 
     /**
      * RegisterController constructor.
@@ -68,33 +67,6 @@ class RegisterController extends AbstractController
         );
     }
 
-    /**
-     * Show action.
-     *
-     * @param \App\Entity\Register $register Register entity
-     *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
-     *
-     * @Route(
-     *     "/{id}",
-     *     methods={"GET"},
-     *     name="register_show",
-     *     requirements={"id": "[1-9]\d*"},
-     * )
-     */
-    public function show(Register $register): Response
-    {
-        if ($register->getAuthor() !== $this->getUser()) {
-            $this->addFlash('warning', 'message_item_not_found');
-
-            return $this->redirectToRoute('register_index');
-        }
-
-        return $this->render(
-            'register/show',
-            ['register' => $register]
-        );
-    }
 
     /**
      * Create action.

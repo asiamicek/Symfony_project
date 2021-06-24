@@ -28,7 +28,7 @@ class NoteType extends AbstractType
     private $tagsDataTransformer;
 
     /**
-     * TaskType constructor.
+     * NoteType constructor.
      *
      * @param \App\Form\DataTransformer\TagsDataTransformer $tagsDataTransformer Tags data transformer
      */
@@ -36,15 +36,6 @@ class NoteType extends AbstractType
     {
         $this->tagsDataTransformer = $tagsDataTransformer;
     }
- //   /**
- //    * NoteType constructor.
- //    *
- //    * @param \App\Form\DataTransformer\TagsDataTransformer $tagsDataTransformer Tags data transformer
- //    */
- //   public function __construct(TagsDataTransformer $tagsDataTransformer)
- //   {
- //       $this->tagsDataTransformer = $tagsDataTransformer;
- //   }
 
     /**
      * Builds the form.
@@ -104,20 +95,6 @@ class NoteType extends AbstractType
             $this->tagsDataTransformer
         );
     }
-
-  //      $builder->add(
-  //          'tags',
-  //          TextType::class,
-   //         [
-  //              'label' => 'label_tags',
-  //              'required' => false,
-  //              'attr' => ['max_length' => 128],
-  //          ]
-   //     );
-
-   //     $builder->get('tags')->addModelTransformer(
-  //          $this->tagsDataTransformer
-  //      );
 
 
     /**

@@ -11,8 +11,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
-
 
 /**
  * Class register.
@@ -84,8 +82,6 @@ class Register
 
     /**
      * Getter for Int.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -94,8 +90,6 @@ class Register
 
     /**
      * Getter for Title.
-     *
-     * @return string|null
      */
     public function getTitle(): ?string
     {
@@ -106,7 +100,7 @@ class Register
      * Setter for Title.
      *
      * @param string $title
-     * @return $this
+     * @return void
      */
     public function setTitle(string $title): void
     {
@@ -115,8 +109,6 @@ class Register
 
     /**
      * Getter for Category.
-     *
-     * @return Category|null
      */
     public function getCategory(): ?Category
     {
@@ -127,7 +119,7 @@ class Register
      * Setter for Category.
      *
      * @param Category|null $category
-     * @return $this
+     * @return void
      */
     public function setCategory(?Category $category): void
     {
@@ -146,7 +138,6 @@ class Register
 
     /**
      * Add Task.
-     *
      * @param Task $task
      */
     public function addTask(Task $task): void
@@ -159,7 +150,6 @@ class Register
 
     /**
      * Remove Task.
-     *
      * @param Task $task
      */
     public function removeTask(Task $task): void
@@ -174,8 +164,6 @@ class Register
 
     /**
      * Getter for Author.
-     *
-     * @return User|null
      */
     public function getAuthor(): ?User
     {
@@ -184,13 +172,10 @@ class Register
 
     /**
      * Setter for Author.
-     *
      * @param User|null $author
      */
     public function setAuthor(?User $author): void
     {
         $this->author = $author;
     }
-
-
 }

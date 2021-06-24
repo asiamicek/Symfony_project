@@ -6,8 +6,6 @@
 namespace App\Service;
 
 use App\Entity\Note;
-use App\Entity\Category;
-use App\Entity\Tag;
 use App\Repository\NoteRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;

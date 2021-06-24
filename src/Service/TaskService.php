@@ -6,9 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Task;
-use App\Entity\Register;
 use App\Repository\TaskRepository;
-use App\Repository\RegisterRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -95,17 +93,6 @@ class TaskService
             TaskRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
-//    public function createPaginatedList(int $page, RegisterRepository $registerRepository, array $filters = []): PaginationInterface
-//    {
-//        $filters = $this->prepareFilters($filters);
-//
-//        return $this->paginator->paginate(
-//                $this->registerRepository->getTasks(),
-//        //    $this->taskRepository->queryByRegister($register, $filters),
-//            $page,
-//            TaskRepository::PAGINATOR_ITEMS_PER_PAGE
-//        );
-//    } [ @param \App\Repository\RegisterRepository registerRepository    RegisterRepository ]
 
     /**
      * Save task.

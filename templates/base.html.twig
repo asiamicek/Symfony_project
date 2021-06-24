@@ -12,7 +12,7 @@
 <body>
 <header>
     {% block header %}
-        <img src="{{ asset('image/logo_apka-removebg-preview.png') }}" width:13vw >
+        <img src="{{ asset('image/logo_apka-removebg-preview.png') }}" id="logo" >
         <nav>
             <ul class="vertical-menu">
 
@@ -21,11 +21,11 @@
                     <li><a href="{{ url('task_index') }}" title="{{ 'task_all_index'|trans }}">{{ 'task_all_index'|trans }}</a></li>
                     <li><a href="{{ url('note_index') }}" title="{{ 'note_index'|trans }}">{{ 'note_index'|trans }}</a></li>
                     <li><a href="{{ url('category_index') }}" title="{{ 'category_index'|trans }}">{{ 'category_index'|trans }}</a></li>
-                    <li><a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">{{ 'tag_index'|trans }}</a></li>
-                    <br>
                     {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">{{ 'tag_index'|trans }}</a></li>
                         <li><a href="{{ url('user_index') }}" title="{{ 'user_index'|trans }}">{{ 'user_index'|trans }}</a></li>
                     {% endif %}
+                    <br>
                     <li><a href="{{ url('user_show',{id: app.user.id}) }}"><b>{{ app.user.firstname }}</b><b style="padding-left: 6px;">{{ app.user.lastname }}</b></a></li>
                     <li><a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a></li>
                 {% else %}
@@ -36,17 +36,7 @@
 
             </ul>
         </nav>
-{#        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
-{#            <div>{{ app.user.email }}</div>#}
-{#            <div>#}
-{#                <a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>#}
-{#            </div>#}
-{#        {% else %}#}
-{#            <div>#}
-{#                <a href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>#}
-{#            </div>#}
-{#        {% endif %}#}
-        <br><p id="foot">© Copyright Joanna Micek</p>
+        <p id="foot">© Copyright Joanna Micek</p>
     {% endblock %}
 </header>
 

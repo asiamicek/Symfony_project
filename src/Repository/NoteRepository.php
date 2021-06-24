@@ -9,7 +9,6 @@ use App\Entity\Category;
 use App\Entity\Note;
 use App\Entity\Tag;
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -35,15 +34,11 @@ class NoteRepository extends ServiceEntityRepository
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;
 
-//    /**
-//     * NoteRepository constructor.
-//     *
-//     * @param \Doctrine\Common\Persistence\ManagerRegistry $registry Manager registry
-//     */
-//    public function __construct(ManagerRegistry $registry)
-//    {
-//        parent::__construct($registry, Note::class);
-//    }
+
+    /**
+     * NoteRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Note::class);

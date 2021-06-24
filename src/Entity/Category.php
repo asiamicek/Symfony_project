@@ -91,7 +91,7 @@ class Category
     /**
      * Setter for Title.
      *
-     * @return $this
+     * @return void
      */
     public function setTitle(string $title): void
     {
@@ -111,7 +111,7 @@ class Category
     /**
      * Add Note.
      *
-     * @return $this
+     * @return void
      */
     public function addNote(Note $note): void
     {
@@ -124,7 +124,8 @@ class Category
     /**
      * Remove note.
      *
-     * @return $this
+     * @param Note $note
+     * @return void
      */
     public function removeNote(Note $note): void
     {
@@ -150,7 +151,7 @@ class Category
      * Add register.
      *
      * @param Register $register
-     * @return $this
+     * @return void
      */
     public function addRegister(Register $register): void
     {
@@ -164,7 +165,7 @@ class Category
      * Remove Register.
      *
      * @param Register $register
-     * @return $this
+     * @return $void
      */
     public function removeRegister(Register $register): void
     {

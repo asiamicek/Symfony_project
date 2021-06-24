@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Registers
+    {{ 'title_register_index'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>Registers</h1>
+    <h1>{{ 'register_index'|trans }}</h1>
 
 
         <a href="{{ url('register_create') }}" title="{{ 'action_create_register'|trans }}" class="btn btn-primary">
@@ -68,7 +68,7 @@
         </div>
     {% else %}
         <p>
-            Empty list!
+            {{ 'message_empty_list'|trans }}
         </p>
     {% endif %}
 {% endblock %}

@@ -7,7 +7,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserdataType;
-use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -22,16 +21,15 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class UserController.
  *
  * @Route("/user")
- *
  */
 class UserController extends AbstractController
 {
     /**
      * Index action.
      *
-     * @param Request               $request            HTTP request
-     * @param UserRepository        $userRepository     User repository
-     * @param PaginatorInterface    $paginator          Paginator
+     * @param Request            $request        HTTP request
+     * @param UserRepository     $userRepository User repository
+     * @param PaginatorInterface $paginator      Paginator
      *
      * @return Response HTTP response
      *
@@ -72,18 +70,29 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-        return $this->render(
-            'user/show.html.twig',
-            ['user' => $user]
-        );
-    }
+        $log = $this->getUser();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->render(
+                'user/show.html.twig',
+                ['user' => $user]
+            );
+        } elseif ($user == $log) {
+            return $this->render(
+                'user/show.html.twig',
+                ['user' => $log]
+            );
+        } else {
+            $this->addFlash('warning', 'message_item_not_found');
 
+            return $this->redirectToRoute('note_index');
+        }
+    }
 
     /**
      * Edit action.
      *
-     * @param Request           $request            HTTP request
-     * @param UserRepository    $userdataRepository User repository
+     * @param Request        $request            HTTP request
+     * @param UserRepository $userdataRepository User repository
      *
      * @return Response HTTP response
      *
@@ -97,28 +106,47 @@ class UserController extends AbstractController
      *     name="user_edit",
      * )
      */
-    public function edit(Request $request, UserRepository $userRepository): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
-        $user = $this->getUser();
+        $log = $this->getUser();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $form = $this->createForm(UserdataType::class, $user, ['method' => 'PUT']);
+            $form->handleRequest($request);
 
-        $form = $this->createForm(UserdataType::class, $user, ['method' => 'PUT']);
-        $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $newPassword = $form->get('newPassword')->getData();
+                $userRepository->save($user, $newPassword);
+                $this->addFlash('success', 'message_updated_successfully');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $newPassword = $form->get('newPassword')->getData();
-            $userRepository->save($user, $newPassword);
+                return $this->redirectToRoute('user_index');
+            }
 
-            $this->addFlash('success', 'message_updated_successfully');
+            return $this->render(
+                'user/edit.html.twig',
+                [
+                    'form' => $form->createView(),
+                    'user' => $user,
+                ]
+            );
+        } else {
+            $form = $this->createForm(UserdataType::class, $log, ['method' => 'PUT']);
+            $form->handleRequest($request);
 
-            return $this->redirectToRoute('note_index');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $newPassword = $form->get('newPassword')->getData();
+                $userRepository->save($log, $newPassword);
+                $this->addFlash('success', 'message_updated_successfully');
+
+                return $this->redirectToRoute('note_index');
+            }
+
+            return $this->render(
+                'user/edit.html.twig',
+                [
+                    'form' => $form->createView(),
+                    'user' => $log,
+                ]
+            );
         }
-
-        return $this->render(
-            'user/edit.html.twig',
-            [
-                'form' => $form->createView(),
-                'user' => $user,
-            ]
-        );
     }
 }

@@ -7,11 +7,7 @@ namespace App\Entity;
 
 use App\Repository\TaskRepository;
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -101,7 +97,7 @@ class Task
      * Setter for Content.
      *
      * @param string $content
-     * @return $this
+     * @return void
      */
     public function setContent(string $content): void
     {
@@ -122,7 +118,7 @@ class Task
      * Setter for Priority.
      *
      * @param int $priority
-     * @return $this
+     * @return void
      */
     public function setPriority(int $priority): void
     {
@@ -143,7 +139,7 @@ class Task
      * Setter for Deadline.
      *
      * @param DateTimeInterface $deadline
-     * @return $this
+     * @return void
      */
     public function setDeadline(DateTimeInterface $deadline): void
     {
@@ -164,7 +160,7 @@ class Task
      * Setter for Register.
      *
      * @param Register|null $register
-     * @return $this
+     * @return void
      */
     public function setRegister(?Register $register): void
     {

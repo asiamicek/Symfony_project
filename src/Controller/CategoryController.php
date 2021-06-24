@@ -8,9 +8,6 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Service\CategoryService;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
-use App\Repository\CategoryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -66,29 +63,6 @@ class CategoryController extends AbstractController
         );
     }
 
-    /**
-     * Show action.
-     *
-     * @param \App\Entity\Category $category Category entity
-     *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
-     *
-     * @Route(
-     *     "/{id}",
-     *     methods={"GET"},
-     *     name="category_show",
-     *     requirements={"id": "[1-9]\d*"},
-     * )
-     *
-     *
-     */
-    public function show(Category $category): Response
-    {
-        return $this->render(
-            'category/show.html.twig',
-            ['category' => $category]
-        );
-    }
 
     /**
      * Create action.

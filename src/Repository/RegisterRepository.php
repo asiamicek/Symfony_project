@@ -6,10 +6,9 @@ use App\Entity\Category;
 use App\Entity\Register;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\Bundle\DoctrineBundle\Registry;
+
 
 /**
  * @method Register|null find($id, $lockMode = null, $lockVersion = null)
@@ -90,16 +89,6 @@ class RegisterRepository extends ServiceEntityRepository
         $this->_em->remove($register);
         $this->_em->flush();
     }
-
-//    public function TitleByAuthor(User $user): QueryBuilder
-//    {
-//
-//        $qb = $this-> queryAll($filters)
-//        $qb->andWhere('register.author = :author')
-//            ->setParameter('author', $user);
-//
-//        return $qb;
-//    }
 
 
     /**
@@ -207,9 +196,5 @@ class RegisterRepository extends ServiceEntityRepository
 //
 //    }
 
-//        $result = $queryBuilder->getQuery()->getResult();
-//
-//        return $result;
-//    }
 
 }

@@ -28,19 +28,6 @@
                     <td>{{ tag.title }}</td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') %}
-{#                        <a href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'action_show'|trans }}">#}
-{#                            {{ 'action_show'|trans }}#}
-{#                        </a>#}
-
-                        {% if not tag.notes|length %}
-                            <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'action_delete'|trans }}" id="op">
-                                {{ 'action_delete'|trans }}
-                            </a>
-                        {% endif %}
-                        {% else %}
-{#                            <a href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'button_view'|trans }}">#}
-{#                                {{ 'button_view'|trans }}#}
-{#                            </a>#}
                             <a href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'action_edit'|trans }}" id="op">
                                 {{ 'action_edit'|trans }}
                             </a>

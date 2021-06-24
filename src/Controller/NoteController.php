@@ -8,7 +8,6 @@ namespace App\Controller;
 use App\Entity\Note;
 use App\Form\NoteType;
 use App\Service\NoteService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,12 +68,7 @@ class NoteController extends AbstractController
             ['pagination' => $pagination]
         );
     }
-//        $filters = [];
-//        $filters['category_id'] = $request->query->getInt('filters_category_id');
-//        $filters['tag_id'] = $request->query->getInt('filters_tag_id');
-//
-//        $page = $request->query->getInt('page', 1);
-//        $pagination = $this->noteService->createPaginatedList($page);
+
     /**
      * Show action.
      *
@@ -88,8 +82,6 @@ class NoteController extends AbstractController
      *     name="note_show",
      *     requirements={"id": "[1-9]\d*"},
      * )
-     *
-     *
      */
     public function show(Note $note): Response
     {
@@ -98,6 +90,7 @@ class NoteController extends AbstractController
 
             return $this->redirectToRoute('note_index');
         }
+
         return $this->render(
             'note/show.html.twig',
             ['note' => $note]
@@ -157,7 +150,6 @@ class NoteController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="note_edit",
      * )
-     *
      */
     public function edit(Request $request, Note $note): Response
     {
@@ -203,7 +195,6 @@ class NoteController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="note_delete",
      * )
-     *
      */
     public function delete(Request $request, Note $note): Response
     {

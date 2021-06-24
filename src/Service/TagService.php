@@ -10,6 +10,7 @@ use App\Repository\TagRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
+
 /**
  * Class TagService.
  */
@@ -45,7 +46,7 @@ class TagService
      * Create paginated list.
      *
      * @param int $page Page number
-     *
+
      * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
      */
     public function createPaginatedList(int $page): PaginationInterface

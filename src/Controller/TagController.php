@@ -10,6 +10,7 @@ use App\Form\TagType;
 use App\Service\TagService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class TagController.
  *
  * @Route("/tag")
+ * @IsGranted("ROLE_ADMIN")
  */
 class TagController extends AbstractController
 {
@@ -53,8 +55,10 @@ class TagController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $page = $request->query->getInt('page', 1);
-        $pagination = $this->tagService->createPaginatedList($page);
+
+        $pagination = $this->tagService->createPaginatedList(
+            $request->query->getInt('page', 1),
+        );
 
         return $this->render(
             'tag/index.html.twig',
@@ -62,27 +66,6 @@ class TagController extends AbstractController
         );
     }
 
-    /**
-     * Show action.
-     *
-     * @param Tag $tag Tag entity
-     *
-     * @return Response HTTP response
-     *
-     * @Route(
-     *     "/{id}",
-     *     methods={"GET"},
-     *     name="tag_show",
-     *     requirements={"id": "[1-9]\d*"},
-     * )
-     */
-    public function show(Tag $tag): Response
-    {
-        return $this->render(
-            'tag/show.html.twig',
-            ['tag' => $tag]
-        );
-    }
 
     /**
      * Create action.
@@ -139,11 +122,7 @@ class TagController extends AbstractController
      */
     public function edit(Request $request, Tag $tag): Response
     {
-//        if ($tag->getNotes()->getAuthor()->getId() !== $this->getUser()->getId()) {
-//            $this->addFlash('warning', 'message_item_not_found');
-//
-//            return $this->redirectToRoute('tag_index');
-//        }
+
         $form = $this->createForm(TagType::class, $tag, ['method' => 'PUT']);
         $form->handleRequest($request);
 
@@ -183,11 +162,6 @@ class TagController extends AbstractController
      */
     public function delete(Request $request, Tag $tag): Response
     {
-//        if ($tag->getNotes()->getAuthor()->getId() !== $this->getUser()->getId()) {
-//            $this->addFlash('warning', 'message_item_not_found');
-//
-//            return $this->redirectToRoute('tag_index');
-//        }
         if ($tag->getNotes()->count()) {
             $this->addFlash('warning', 'message_tag_contains_note');
 

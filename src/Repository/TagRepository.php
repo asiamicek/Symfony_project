@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
+
+
 /**
  * @method Tag|null find($id, $lockMode = null, $lockVersion = null)
  * @method Tag|null findOneBy(array $criteria, array $orderBy = null)
@@ -53,9 +55,9 @@ class TagRepository extends ServiceEntityRepository
         ;
     }
     */
+
     /**
      * TagRepository constructor.
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -67,12 +69,12 @@ class TagRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
             ->orderBY('tag.id', 'DESC');
     }
+
 
     /**
      * Get or create new query builder.

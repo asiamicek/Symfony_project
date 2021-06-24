@@ -6,11 +6,8 @@
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Entity\User;
 use App\Form\TaskType;
-use App\Repository\TaskRepository;
 use App\Service\TaskService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,8 +86,6 @@ class TaskController extends AbstractController
      *     name="task_show",
      *     requirements={"id": "[1-9]\d*"},
      * )
-     *
-     *
      */
     public function show(Task $task): Response
     {
@@ -99,6 +94,7 @@ class TaskController extends AbstractController
 
             return $this->redirectToRoute('register_index');
         }
+
         return $this->render(
             'task/show.html.twig',
             ['task' => $task]
@@ -108,8 +104,9 @@ class TaskController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request           $request HTTP request
      * @param \Symfony\Component\Security\Core\User\UserInterface $user
+     *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
@@ -161,8 +158,6 @@ class TaskController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="task_edit",
      * )
-     *
-     *
      */
     public function edit(Request $request, Task $task): Response
     {
@@ -207,8 +202,6 @@ class TaskController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="task_delete",
      * )
-     *
-     *
      */
     public function delete(Request $request, Task $task): Response
     {

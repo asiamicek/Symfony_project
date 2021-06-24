@@ -144,7 +144,8 @@ class Note
     /**
      * Setter for Content.
      *
-     * @return $this
+     * @param string $content
+     * @return void
      */
     public function setContent(string $content): void
     {
@@ -162,7 +163,8 @@ class Note
     /**
      * Setter for Title.
      *
-     * @return $this
+     * @param string $title
+     * @return void
      */
     public function setTitle(string $title): void
     {
@@ -182,7 +184,8 @@ class Note
     /**
      * Setter for Created At.
      *
-     * @return $this
+     * @param DateTimeInterface $createdAt
+     * @return void
      */
     public function setCreatedAt(DateTimeInterface $createdAt): void
     {
@@ -204,7 +207,8 @@ class Note
     /**
      * Setter for Updated At.
      *
-     * @return $this
+     * @param DateTimeInterface $updatedAt
+     * @return void
      */
     public function setUpdatedAt(DateTimeInterface $updatedAt): void
     {
@@ -222,7 +226,8 @@ class Note
     /**
      * Setter for Category.
      *
-     * @return $this
+     * @param Category|null $category
+     * @return void
      */
     public function setCategory(?Category $category): void
     {
@@ -243,6 +248,7 @@ class Note
      * Add Tag.
      *
      * @param Tag $tag
+     * @return void
      */
     public function addTag(Tag $tag): void
     {

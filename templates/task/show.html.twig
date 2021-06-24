@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Task view
+    {{ 'title_task_details'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>View record</h1>
+    <h1>{{ 'task_details'|trans }}</h1>
     {% if task is defined and task|length %}
         <table class="table table-striped">
             <tr>

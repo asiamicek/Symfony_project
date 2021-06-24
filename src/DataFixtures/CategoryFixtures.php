@@ -20,7 +20,7 @@ class CategoryFixtures extends AbstractBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(10, 'categories', function ($i) {
+        $this->createMany(10, 'categories', function($i){
             $category = new Category();
             $category->setTitle($this->faker->word);
             return $category;

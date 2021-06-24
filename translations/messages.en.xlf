@@ -290,6 +290,10 @@
                 <source>title_category_edit</source>
                 <target>Category edit</target>
             </trans-unit>
+            <trans-unit id="title_index">
+                <source>title_index</source>
+                <target>Get Organized</target>
+            </trans-unit>
             <trans-unit id="title_record_list">
                 <source>title_record_list</source>
                 <target>Records list</target>
