@@ -8,11 +8,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class User
+ * Class User.
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(
@@ -103,8 +102,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=128)
      */
     private $lastname;
-
-    
 
     /**
      * Getter for the Id.
@@ -215,11 +212,19 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * Getter for Firstname.
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * Setter for Firstname.
+     *
+     * @return $this
+     */
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
@@ -227,17 +232,23 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * Getter for Lastname.
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * Setter for Lastname.
+     *
+     * @return $this
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
 
         return $this;
     }
-
-
 }

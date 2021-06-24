@@ -88,11 +88,11 @@ class TaskController extends AbstractController
      */
     public function show(Task $task): Response
     {
-//        if ($task->getRegister() !== $this->getUser(getRegister())) {
-//            $this->addFlash('warning', 'message.item_not_found');
-//
-//            return $this->redirectToRoute('task_index');
-//        }
+        if ($task->getRegister()->getAuthor()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('warning', 'message_item_not_found');
+
+            return $this->redirectToRoute('register_index');
+        }
         return $this->render(
             'task/show.html.twig',
             ['task' => $task]
@@ -122,7 +122,7 @@ class TaskController extends AbstractController
 //        $form->handleRequest($request);
 
         $task = new Task();
-        $form = $this->createForm(TaskType::class, $task, ['method' => 'PUT', 'user' => $this->getUser()]);
+        $form = $this->createForm(TaskType::class, $task, ['method' => 'POST']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

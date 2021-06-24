@@ -21,6 +21,9 @@ header{
     height: 100%;
     background-color: #a26cafc4;
 }
+#baner{
+    width:80vw;
+}
 img{
     width:18vw;
     padding-bottom: 20px;

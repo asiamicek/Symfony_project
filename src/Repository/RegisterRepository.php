@@ -172,20 +172,20 @@ class RegisterRepository extends ServiceEntityRepository
         return $queryBuilder ?? $this->createQueryBuilder('register');
     }
 
-    /**
-     * @param User $user
-     * @return Collection|null
-     */
-    public function findByAuthor(User $user): ?Collection
-    {
-
-        $queryBuilder = $this->getOrCreateQueryBuilder()
-            ->andWhere('register.author = :user')
-            ->setParameter('user', $user);
-
-        return $queryBuilder->getQuery()->getResult();
-
-    }
+//    /**
+//     * @param User $user
+//     * @return Collection|null
+//     */
+//    public function findByAuthor(User $user): ?Collection
+//    {
+//
+//        $queryBuilder = $this->getOrCreateQueryBuilder()
+//            ->andWhere('register.author = :user')
+//            ->setParameter('user', $user);
+//
+//        return $queryBuilder->getQuery()->getResult();
+//
+//    }
 
 //    /**
 //     * @param User $user

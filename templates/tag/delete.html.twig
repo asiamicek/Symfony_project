@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_tag_delete'|trans({'%id%': tag.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+
+    {% include 'default/_form.html.twig' with {
+        page_title: 'tag_delete',
+        page_title_param: {'%id%': tag.id},
+        attr: {
+            method: 'DELETE',
+            action: url('tag_delete', {'id': tag.id}),
+        },
+        form: form,
+        submit_label: 'action_delete'|trans,
+        message: 'message_deleted_successfully'|trans,
+        back_to_list_path: 'tag_index',
+    } %}
+{% endblock %}

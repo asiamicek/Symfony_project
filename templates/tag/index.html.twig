@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title_tag_list'|trans }}
+    {{ 'title_tag_index'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h2>{{ 'tag_list'|trans }}</h2>
+    <h2>{{ 'tag_index'|trans }}</h2>
     {% if pagination is defined and pagination.items|length %}
 {#        <button><a href="{{ url('tag_create') }}" title="{{ 'action_create'|trans }}">{{ 'action_create'|trans }}</a></button>#}
 
@@ -28,24 +28,25 @@
                     <td>{{ tag.title }}</td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'button_view'|trans }}">
-                            {{ 'button_view'|trans }}
-                        </a>
+{#                        <a href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'action_show'|trans }}">#}
+{#                            {{ 'action_show'|trans }}#}
+{#                        </a>#}
+                        {% endif %}
                         {% if not tag.notes|length %}
-                            <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'delete'|trans }}" id="op">
-                                {{ 'delete'|trans }}
+                            <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'action_delete'|trans }}" id="op">
+                                {{ 'action_delete'|trans }}
                             </a>
                         {% endif %}
                         {% else %}
-                            <a href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'button_view'|trans }}">
-                                {{ 'button_view'|trans }}
-                            </a>
-                            <a href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'button_edit'|trans }}" id="op">
-                                {{ 'button_edit'|trans }}
+{#                            <a href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'button_view'|trans }}">#}
+{#                                {{ 'button_view'|trans }}#}
+{#                            </a>#}
+                            <a href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'action_edit'|trans }}" id="op">
+                                {{ 'action_edit'|trans }}
                             </a>
                             {% if not tag.notes|length %}
-                                <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'delete'|trans }}" id="op">
-                                    {{ 'delete'|trans }}
+                                <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'action_delete'|trans }}" id="op">
+                                    {{ 'action_delete'|trans }}
                                 </a>
                             {% endif %}
                         {% endif %}

@@ -91,7 +91,7 @@ class RegisterController extends AbstractController
         }
 
         return $this->render(
-            'register/show.html.twig',
+            'register/show',
             ['register' => $register]
         );
     }
@@ -194,15 +194,15 @@ class RegisterController extends AbstractController
      *     name="register_delete",
      * )
      */
-    public function delete(Request $request, Register $register, Category $category): Response
+    public function delete(Request $request, Register $register): Response
     {
         if ($register->getAuthor() !== $this->getUser()) {
             $this->addFlash('warning', 'message_item_not_found');
 
             return $this->redirectToRoute('register_index');
         }
-        if ($category->getTasks()->count()) {
-            $this->addFlash('warning', 'message_category_contains_tasks');
+        if ($register->getTasks()->count()) {
+            $this->addFlash('warning', 'message_register_contains_tasks');
 
             return $this->redirectToRoute('category_index');
         }

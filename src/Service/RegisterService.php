@@ -8,6 +8,7 @@ namespace App\Service;
 use App\Entity\Register;
 use App\Entity\User;
 use App\Repository\RegisterRepository;
+use Doctrine\Common\Collections\Collection;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -133,7 +134,11 @@ class RegisterService
     }
 
 
-    public function findByAuthor(User $user)
+    /**
+     * @param User $user
+     * @return Register[]
+     */
+    public function findByAuthor(User $user): array
     {
         return $this->registerRepository->findByAuthor($user);
     }

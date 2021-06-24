@@ -17,19 +17,19 @@
             <ul class="vertical-menu">
 
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <li><a href="{{ url('register_index') }}" title="Registers">Registers</a></li>
-                    <li><a href="{{ url('note_index') }}" title="Notes">Notes</a></li>
-                    <li><a href="{{ url('category_index') }}" title="Categories">Categories</a></li>
-                    <li><a href="{{ url('tag_index') }}">Tags</a></li>
+                    <li><a href="{{ url('register_index') }}" title="{{ 'register_index'|trans }}">{{ 'register_index'|trans }}</a></li>
+                    <li><a href="{{ url('note_index') }}" title="{{ 'note_index'|trans }}">{{ 'note_index'|trans }}</a></li>
+                    <li><a href="{{ url('category_index') }}" title="{{ 'category_index'|trans }}">{{ 'category_index'|trans }}</a></li>
+                    <li><a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">{{ 'tag_index'|trans }}</a></li>
                     <br>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ url('user_index') }}">Dane użytkowników</a></li>
+                        <li><a href="{{ url('user_index') }}" title="{{ 'user_index'|trans }}">{{ 'user_index'|trans }}</a></li>
                     {% endif %}
-                    <li><a href="{{ url('user_show',{id: app.user.id}) }}"><b>{{ app.user.firstname }}</b><b style="padding-left: 8px;">{{ app.user.lastname }}</b></a></li>
+                    <li><a href="{{ url('user_show',{id: app.user.id}) }}"><b>{{ app.user.firstname }}</b><b style="padding-left: 6px;">{{ app.user.lastname }}</b></a></li>
                     <li><a href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a></li>
                 {% else %}
-                    <li><a href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a></li>
-                    <li><a href="{{url('registration_signup')}}" title="sign_up">{{ 'sign_up'|trans }}</a></li>
+                    <li><a href="{{ url('app_login') }}" title="{{ 'action_login'|trans }}">{{ 'action_login'|trans }}</a></li>
+                    <li><a href="{{url('registration_signup')}}" title="{{ 'action_signup'|trans }}">{{ 'action_signup'|trans }}</a></li>
                 {% endif %}
 
 

@@ -6,6 +6,10 @@
                 <source>action_back_to_list</source>
                 <target>Back to the list</target>
             </trans-unit>
+            <trans-unit id="action_close">
+                <source>action_close</source>
+                <target>Close</target>
+            </trans-unit>
             <trans-unit id="action_create">
                 <source>action_create</source>
                 <target>Create</target>
@@ -18,13 +22,29 @@
                 <source>action_edit</source>
                 <target>Edit</target>
             </trans-unit>
+            <trans-unit id="action_login">
+                <source>action_login</source>
+                <target>Log in</target>
+            </trans-unit>
+            <trans-unit id="action_logout">
+                <source>action_logout</source>
+                <target>Log out</target>
+            </trans-unit>
             <trans-unit id="action_save">
                 <source>action_save</source>
                 <target>Save</target>
             </trans-unit>
+            <trans-unit id="action_signup">
+                <source>action_signup</source>
+                <target>Sing up</target>
+            </trans-unit>
             <trans-unit id="action_show">
                 <source>action_show</source>
                 <target>Show</target>
+            </trans-unit>
+            <trans-unit id="action_registered">
+                <source>action_registration</source>
+                <target>Sign up</target>
             </trans-unit>
             <trans-unit id="category_create">
                 <source>category_create</source>
@@ -46,13 +66,9 @@
                 <source>label_actions</source>
                 <target>Actions</target>
             </trans-unit>
-            <trans-unit id="label_id">
-                <source>label_id</source>
-                <target>Id</target>
-            </trans-unit>
-            <trans-unit id="label_title">
-                <source>label_title</source>
-                <target>Title</target>
+            <trans-unit id="label_author">
+                <source>label_author</source>
+                <target>Author</target>
             </trans-unit>
             <trans-unit id="label_category">
                 <source>label_category</source>
@@ -70,6 +86,34 @@
                 <source>label_deadline</source>
                 <target>Deadline</target>
             </trans-unit>
+            <trans-unit id="label_email">
+                <source>label_email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="label_firstname">
+                <source>label_firstname</source>
+                <target>Firstname</target>
+            </trans-unit>
+            <trans-unit id="label_id">
+                <source>label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="label_lastname">
+                <source>label_lastname</source>
+                <target>Lastname</target>
+            </trans-unit>
+            <trans-unit id="label_none">
+                <source>label_none</source>
+                <target>--------</target>
+            </trans-unit>
+            <trans-unit id="label_password_repeat">
+                <source>label_password_repeat</source>
+                <target>Repeat password</target>
+            </trans-unit>
+            <trans-unit id="label_password">
+                <source>label_password</source>
+                <target>Password</target>
+            </trans-unit>
             <trans-unit id="label_priority">
                 <source>label_priority</source>
                 <target>Priority</target>
@@ -78,21 +122,69 @@
                 <source>label_reg_id</source>
                 <target>Register id</target>
             </trans-unit>
+            <trans-unit id="label_register">
+                <source>label_register</source>
+                <target>Register</target>
+            </trans-unit>
             <trans-unit id="label_tags">
                 <source>label_tags</source>
                 <target>Tags</target>
+            </trans-unit>
+            <trans-unit id="label_title">
+                <source>label_title</source>
+                <target>Title</target>
             </trans-unit>
             <trans-unit id="label_updated_at">
                 <source>label_updated_at</source>
                 <target>Updated at</target>
             </trans-unit>
+            <trans-unit id="message_category_contains_notes">
+                <source>message_category_contains_notes</source>
+                <target>Category contains notes!</target>
+            </trans-unit>
+            <trans-unit id="message_category_contains_tasks">
+                <source>message_category_contains_tasks</source>
+                <target>Category contains tasks!</target>
+            </trans-unit>
+            <trans-unit id="message_created_successfully">
+                <source>message_created_successfully</source>
+                <target>Created successfully</target>
+            </trans-unit>
+            <trans-unit id="message_deleted_successfully">
+                <source>message_deleted_successfully</source>
+                <target>Deleted successfully</target>
+            </trans-unit>
             <trans-unit id="message_empty_list">
                 <source>message_empty_list</source>
-                <target>Empty list</target>
+                <target>Empty list!</target>
+            </trans-unit>
+            <trans-unit id="message_form_error">
+                <source>message_form_error</source>
+                <target>Form error!</target>
+            </trans-unit>
+            <trans-unit id="message_item_not_found">
+                <source>message_item_not_found</source>
+                <target>Item not found</target>
             </trans-unit>
             <trans-unit id="message_no_record">
                 <source>message_no_record</source>
-                <target>No record</target>
+                <target>No record !</target>
+            </trans-unit>
+            <trans-unit id="message_register_contains_tasks">
+                <source>message_register_contains_tasks</source>
+                <target>Register contains tasks!</target>
+            </trans-unit>
+            <trans-unit id="message_registered_successfully">
+                <source>message_registered_successfully</source>
+                <target>Registered successfully</target>
+            </trans-unit>
+            <trans-unit id="message_tag_contains_note">
+                <source>message_tag_contains_note</source>
+                <target>Tag contains note!</target>
+            </trans-unit>
+            <trans-unit id="message_updated_successfully">
+                <source>message_updated_successfully</source>
+                <target>Updated successfully</target>
             </trans-unit>
             <trans-unit id="note_create">
                 <source>note_create</source>
@@ -129,6 +221,18 @@
             <trans-unit id="register_index">
                 <source>register_index</source>
                 <target>Registers</target>
+            </trans-unit>
+            <trans-unit id="tag_delete">
+                <source>tag_delete</source>
+                <target>Delete tag</target>
+            </trans-unit>
+            <trans-unit id="tag_edit">
+                <source>tag_edit</source>
+                <target>Edit tag</target>
+            </trans-unit>
+            <trans-unit id="tag_index">
+                <source>tag_index</source>
+                <target>Tags</target>
             </trans-unit>
             <trans-unit id="task_create">
                 <source>task_create</source>
@@ -206,6 +310,18 @@
                 <source>title_register_index</source>
                 <target>Registers</target>
             </trans-unit>
+            <trans-unit id="title_tag_delete">
+                <source>title_tag_delete</source>
+                <target>Tag delete</target>
+            </trans-unit>
+            <trans-unit id="title_tag_edit">
+                <source>title_tag_edit</source>
+                <target>Tag edit</target>
+            </trans-unit>
+            <trans-unit id="title_tag_index">
+                <source>title_tag_index</source>
+                <target>Tags</target>
+            </trans-unit>
             <trans-unit id="title_task_create">
                 <source>title_task_create</source>
                 <target>Task create</target>
@@ -225,6 +341,30 @@
             <trans-unit id="title_task_index">
                 <source>title_task_index</source>
                 <target>Tasks</target>
+            </trans-unit>
+            <trans-unit id="title_user_details">
+                <source>title_user_details</source>
+                <target>User details</target>
+            </trans-unit>
+            <trans-unit id="title_user_edit">
+                <source>title_user_edit</source>
+                <target>User edit</target>
+            </trans-unit>
+            <trans-unit id="title_user_index">
+                <source>title_user_index</source>
+                <target>Users</target>
+            </trans-unit>
+            <trans-unit id="user_details">
+                <source>user_details</source>
+                <target>User details</target>
+            </trans-unit>
+            <trans-unit id="user_edit">
+                <source>user_edit</source>
+                <target>Edit user</target>
+            </trans-unit>
+            <trans-unit id="user_index">
+                <source>user_index</source>
+                <target>Users</target>
             </trans-unit>
 
 

@@ -8,27 +8,27 @@
 
     {% if is_granted('ROLE_ADMIN') %}
         {% include 'default/_form.html.twig' with {
-            page_title: 'title_users_edit',
+            page_title: 'user_edit',
             page_title_param: {'%id%': user.id},
             attr: {
                 method: 'PUT',
                 action: url('user_edit', {'id': user.id}),
             },
             form: form,
-            submit_label: 'action_edited'|trans,
+            submit_label: 'action_save'|trans,
             message: 'message_updated_successfully'|trans,
             back_to_list_path: 'user_index',
         } %}
     {% else %}
         {% include 'default/_form.html.twig' with {
-            page_title: 'title_users_edit',
+            page_title: 'user_edit',
             page_title_param: {'%id%': user.id},
             attr: {
                 method: 'PUT',
                 action: url('user_edit', {'id': user.id}),
             },
             form: form,
-            submit_label: 'action_edited'|trans,
+            submit_label: 'action_save'|trans,
             message: 'message_updated_successfully'|trans,
             back_to_list_path: 'note_index',
         } %}

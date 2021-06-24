@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title_category_delete'|trans({'%id%': category.id|default('')}) }}</h1>
+    <h1>{{ 'category_delete'|trans({'%id%': category.id|default('')}) }}</h1>
     {{ form_start(form, { method: 'DELETE', action: url('category_delete', {id: category.id}) }) }}
     {{ form_widget(form) }}
     <div class="form-group row float-sm-right">
