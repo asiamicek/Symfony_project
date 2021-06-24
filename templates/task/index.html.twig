@@ -6,11 +6,11 @@
 
 {% block body %}
     <h1>{{ 'task_index'|trans }}</h1>
-    <button>
-        <a href="{{ url('task_create') }}">
+
+        <a href="{{ url('task_create') }}" class="btn btn-primary" >
             {{ 'action_create'|trans }}
         </a>
-    </button>
+
 
     {% if pagination is defined and pagination.items|length %}
 
@@ -24,7 +24,7 @@
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'task.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label_reg_id'|trans, 'task.register.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_register'|trans, 'task.register.title') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_content'|trans, 'task.content') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_priority'|trans, 'task.priority') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_deadline'|trans, 'task.deadline') }}</th>
@@ -35,7 +35,9 @@
             {% for task in pagination.items %}
                 <tr>
                     <td>{{ task.id }}</td>
-                    <td>{{ task.register.id }}</td>
+                    <td><a href="{{ url('task_index', {'filters_register_id' : task.register.id}) }}" title="{{ task.register.title }}">
+                            {{ task.register.title }}
+                        </a></td>
                     <td>{{ task.content }}</td>
                     <td>{{ task.priority }}</td>
                     <td>{{ task.deadline|date('Y/m/d') }}</td>

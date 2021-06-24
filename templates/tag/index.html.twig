@@ -31,7 +31,7 @@
 {#                        <a href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'action_show'|trans }}">#}
 {#                            {{ 'action_show'|trans }}#}
 {#                        </a>#}
-                        {% endif %}
+
                         {% if not tag.notes|length %}
                             <a href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'action_delete'|trans }}" id="op">
                                 {{ 'action_delete'|trans }}

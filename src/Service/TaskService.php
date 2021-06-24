@@ -79,17 +79,18 @@ class TaskService
     /**
      * Create paginated list.
      *
-     * @param int                                                 $page    Page number
+     * @param int $page Page number
+     * @param UserInterface $user
      * @param array $filters Filters array
      *
      * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
      */
-    public function createPaginatedList(int $page, array $filters = []): PaginationInterface
+    public function createPaginatedList(int $page, UserInterface $user, array $filters = []): PaginationInterface
     {
         $filters = $this->prepareFilters($filters);
 
         return $this->paginator->paginate(
-            $this->taskRepository->queryAll($filters),
+            $this->taskRepository->queryByAuthor($user, $filters),
             $page,
             TaskRepository::PAGINATOR_ITEMS_PER_PAGE
         );

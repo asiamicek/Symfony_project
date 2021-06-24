@@ -139,6 +139,11 @@ class TagController extends AbstractController
      */
     public function edit(Request $request, Tag $tag): Response
     {
+//        if ($tag->getNotes()->getAuthor()->getId() !== $this->getUser()->getId()) {
+//            $this->addFlash('warning', 'message_item_not_found');
+//
+//            return $this->redirectToRoute('tag_index');
+//        }
         $form = $this->createForm(TagType::class, $tag, ['method' => 'PUT']);
         $form->handleRequest($request);
 
@@ -178,6 +183,11 @@ class TagController extends AbstractController
      */
     public function delete(Request $request, Tag $tag): Response
     {
+//        if ($tag->getNotes()->getAuthor()->getId() !== $this->getUser()->getId()) {
+//            $this->addFlash('warning', 'message_item_not_found');
+//
+//            return $this->redirectToRoute('tag_index');
+//        }
         if ($tag->getNotes()->count()) {
             $this->addFlash('warning', 'message_tag_contains_note');
 

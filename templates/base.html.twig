@@ -18,6 +18,7 @@
 
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <li><a href="{{ url('register_index') }}" title="{{ 'register_index'|trans }}">{{ 'register_index'|trans }}</a></li>
+                    <li><a href="{{ url('task_index') }}" title="{{ 'task_all_index'|trans }}">{{ 'task_all_index'|trans }}</a></li>
                     <li><a href="{{ url('note_index') }}" title="{{ 'note_index'|trans }}">{{ 'note_index'|trans }}</a></li>
                     <li><a href="{{ url('category_index') }}" title="{{ 'category_index'|trans }}">{{ 'category_index'|trans }}</a></li>
                     <li><a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">{{ 'tag_index'|trans }}</a></li>

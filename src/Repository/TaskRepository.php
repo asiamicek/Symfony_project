@@ -82,9 +82,27 @@ class TaskRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
+    /**
+     * @param User $user
+     * @param array $filters
+     * @return QueryBuilder
+     */
+    public function queryByAuthor(User $user, array $filters = []): QueryBuilder
+    {
+
+        $queryBuilder = $this->queryAll($filters);
+        $queryBuilder
+            ->join('task.register', 'reg' )
+            ->leftJoin('register.author', 'aut')
+            ->andWhere('register.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
 //    /**
 //     * Query tasks by register.
-//     *
+//     *>select(['register.title'])
+////            ->from(Register::class, 'register')
 //     * @param \App\Entity\Register $register    Register entity
 //     * @param array            $filters Filters array
 //     *

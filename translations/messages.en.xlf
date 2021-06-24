@@ -6,6 +6,14 @@
                 <source>action_back_to_list</source>
                 <target>Back to the list</target>
             </trans-unit>
+            <trans-unit id="action_back_to_registers">
+                <source>action_back_to_registers</source>
+                <target>Back to registers</target>
+            </trans-unit>
+            <trans-unit id="action_back_to_tasks">
+                <source>action_back_to_tasks</source>
+                <target>Back to tasks</target>
+            </trans-unit>
             <trans-unit id="action_close">
                 <source>action_close</source>
                 <target>Close</target>
@@ -13,6 +21,14 @@
             <trans-unit id="action_create">
                 <source>action_create</source>
                 <target>Create</target>
+            </trans-unit>
+            <trans-unit id="action_create_register">
+                <source>action_create_register</source>
+                <target>Create register</target>
+            </trans-unit>
+            <trans-unit id="action_create_task">
+                <source>action_create_task</source>
+                <target>Add task</target>
             </trans-unit>
             <trans-unit id="action_delete">
                 <source>action_delete</source>
@@ -233,6 +249,10 @@
             <trans-unit id="tag_index">
                 <source>tag_index</source>
                 <target>Tags</target>
+            </trans-unit>
+            <trans-unit id="task_all_index">
+                <source>task_all_index</source>
+                <target>All tasks</target>
             </trans-unit>
             <trans-unit id="task_create">
                 <source>task_create</source>

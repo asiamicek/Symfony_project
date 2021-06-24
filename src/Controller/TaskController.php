@@ -61,8 +61,14 @@ class TaskController extends AbstractController
 
         $pagination = $this->taskService->createPaginatedList(
             $request->query->getInt('page', 1),
+            $this->getUser(),
             $filters
         );
+//        if($filters->count()<0){
+//            $this->addFlash('warning', 'message_item_not_found');
+//
+//            return $this->redirectToRoute('register_index');
+//        }
 
         return $this->render(
             'task/index.html.twig',
@@ -129,7 +135,7 @@ class TaskController extends AbstractController
             $this->taskService->save($task);
             $this->addFlash('success', 'message_created_successfully');
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('register_index');
         }
 
         return $this->render(
@@ -160,6 +166,11 @@ class TaskController extends AbstractController
      */
     public function edit(Request $request, Task $task): Response
     {
+        if ($task->getRegister()->getAuthor()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('warning', 'message_item_not_found');
+
+            return $this->redirectToRoute('task_index');
+        }
         $form = $this->createForm(TaskType::class, $task, ['method' => 'PUT']);
         $form->handleRequest($request);
 
@@ -167,7 +178,7 @@ class TaskController extends AbstractController
             $this->taskService->save($task);
             $this->addFlash('success', 'message_updated_successfully');
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('register_index');
         }
 
         return $this->render(
@@ -201,6 +212,11 @@ class TaskController extends AbstractController
      */
     public function delete(Request $request, Task $task): Response
     {
+        if ($task->getRegister()->getAuthor()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('warning', 'message_item_not_found');
+
+            return $this->redirectToRoute('task_index');
+        }
         $form = $this->createForm(FormType::class, $task, ['method' => 'DELETE']);
         $form->handleRequest($request);
 

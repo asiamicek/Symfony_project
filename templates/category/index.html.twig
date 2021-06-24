@@ -8,11 +8,11 @@
     <h1>{{ 'category_index'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
         {% if is_granted('ROLE_ADMIN') %}
-        <button>
-            <a href="{{ url('category_create') }}">
+
+            <a href="{{ url('category_create') }}" class="btn btn-primary">
                 {{ 'action_create'|trans }}
             </a>
-        </button>
+
         {% endif %}
 
         <div class="navigation text-center">

@@ -13,6 +13,10 @@
                 <td>{{ task.id }}</td>
             </tr>
             <tr>
+                <th>{{ 'label_register'|trans }}</th>
+                <td>{{ task.register.title }}</td>
+            </tr>
+            <tr>
                 <th>{{ 'label_content'|trans }}</th>
                 <td>{{ task.content }}</td>
             </tr>
@@ -25,14 +29,28 @@
                 <td>{{ task.deadline|date('Y/m/d') }}</td>
             </tr>
 
+        <a href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action_edit'|trans }}" class="btn btn-link">
+            {{ 'action_edit'|trans }}
+        </a>
+
+        <a href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action_delete'|trans }}" class="btn btn-link">
+            {{ 'action_delete'|trans }}
+        </a>
+
     {% else %}
         <p>
             {{ 'message_no_record'|trans }}
         </p>
+
     {% endif %}
-        <p>
-            <a href="{{ url('task_index', {'filters_register_id' : task.register.id}) }}" title="{{ 'action_back_to_list'|trans }}">
-                {{ 'action_back_to_list'|trans }}
-            </a>
-        </p>
+
+
+        <a href="{{ url('task_index') }}" class="btn btn-link">
+            {{ 'action_back_to_tasks'|trans }}
+        </a>
+
+        <a href="{{ url('register_index') }}" class="btn btn-link">
+            {{ 'action_back_to_registers'|trans }}
+        </a>
+
 {% endblock %}

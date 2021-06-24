@@ -7,11 +7,11 @@
 {% block body %}
     <h1>{{ 'note_index'|trans }}</h1>
 
-    <button>
-        <a href="{{ url('note_create') }}">
+
+        <a href="{{ url('note_create') }}" class="btn btn-primary">
             {{ 'action_create'|trans }}
         </a>
-    </button>
+
 
     {% if pagination is defined and pagination.items|length %}
 

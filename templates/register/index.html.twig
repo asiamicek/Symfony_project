@@ -7,11 +7,15 @@
 {% block body %}
     <h1>Registers</h1>
 
-    <button>
-        <a href="{{ url('register_create') }}">
-            {{ 'action_create'|trans }}
+
+        <a href="{{ url('register_create') }}" title="{{ 'action_create_register'|trans }}" class="btn btn-primary">
+            {{ 'action_create_register'|trans }}
         </a>
-    </button>
+
+    <a href="{{ url('task_create') }}" title="{{ 'action_create_task'|trans }}" class="btn btn-primary">
+        {{ 'action_create_task'|trans }}
+    </a>
+
     {% if pagination is defined and pagination.items|length %}
 
 
@@ -47,6 +51,7 @@
                         <a href="{{ url('register_edit', {id: register.id}) }}" title="{{ 'action_edit'|trans }}">
                             {{ 'action_edit'|trans }}
                         </a>
+
 
                         {% if not register.tasks|length %}
                         <a href="{{ url('register_delete', {id: register.id}) }}" title="{{ 'action_delete'|trans }}">

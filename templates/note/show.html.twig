@@ -37,12 +37,15 @@
         </p>
     {% endif %}
     <p>
-        <a href="{{url('note_index') }}" title="{{ 'action_back_to_list'|trans }}">
+        <a href="{{url('note_index') }}" title="{{ 'action_back_to_list'|trans }}" class="btn btn-link">
             {{ 'action_back_to_list'|trans }}
         </a>
-        <br>
-        <a href="{{ url('note_edit', {id: note.id}) }}" title="{{ 'action_edit'|trans }}">
+
+        <a href="{{ url('note_edit', {id: note.id}) }}" title="{{ 'action_edit'|trans }}" class="btn btn-link">
             {{ 'action_edit'|trans }}
+        </a>
+        <a href="{{ url('note_delete', {id: note.id}) }}" title="{{ 'action_delete'|trans }}" class="btn btn-link">
+            {{ 'action_delete'|trans }}
         </a>
     </p>
 {% endblock %}
