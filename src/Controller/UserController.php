@@ -71,19 +71,15 @@ class UserController extends AbstractController
     public function show(User $user): Response
     {
         $log = $this->getUser();
-        if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->render(
+        if ($this->isGranted('ROLE_ADMIN')) return $this->render(
+            'user/show.html.twig',
+            ['user' => $user]);
+        if ($user === $log)  return $this->render(
                 'user/show.html.twig',
-                ['user' => $user]
-            );
-        } elseif ($user == $log) {
-            return $this->render(
-                'user/show.html.twig',
-                ['user' => $log]
-            );
-        } else {
-            $this->addFlash('warning', 'message_item_not_found');
+                ['user' => $log]);
 
+        else {
+            $this->addFlash('warning', 'message_item_not_found');
             return $this->redirectToRoute('note_index');
         }
     }

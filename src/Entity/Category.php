@@ -172,7 +172,7 @@ class Category
      *
      * @param Register $register
      *
-     * @return $void
+     * @return void
      */
     public function removeRegister(Register $register): void
     {
