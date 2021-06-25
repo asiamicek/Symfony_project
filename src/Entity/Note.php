@@ -127,6 +127,7 @@ class Note
 
     /**
      * Getter for Id.
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -135,6 +136,7 @@ class Note
 
     /**
      * Getter for Content.
+     * @return string|null
      */
     public function getContent(): ?string
     {
@@ -145,6 +147,7 @@ class Note
      * Setter for Content.
      *
      * @param string $content
+     *
      * @return void
      */
     public function setContent(string $content): void
@@ -154,6 +157,7 @@ class Note
 
     /**
      * Getter for Title.
+     * @return string|null
      */
     public function getTitle(): ?string
     {
@@ -164,6 +168,7 @@ class Note
      * Setter for Title.
      *
      * @param string $title
+     *
      * @return void
      */
     public function setTitle(string $title): void
@@ -185,6 +190,7 @@ class Note
      * Setter for Created At.
      *
      * @param DateTimeInterface $createdAt
+     *
      * @return void
      */
     public function setCreatedAt(DateTimeInterface $createdAt): void
@@ -208,6 +214,7 @@ class Note
      * Setter for Updated At.
      *
      * @param DateTimeInterface $updatedAt
+     *
      * @return void
      */
     public function setUpdatedAt(DateTimeInterface $updatedAt): void
@@ -217,6 +224,7 @@ class Note
 
     /**
      * Getter for Category.
+     * @return Category|null
      */
     public function getCategory(): ?Category
     {
@@ -227,6 +235,7 @@ class Note
      * Setter for Category.
      *
      * @param Category|null $category
+     *
      * @return void
      */
     public function setCategory(?Category $category): void
@@ -248,6 +257,7 @@ class Note
      * Add Tag.
      *
      * @param Tag $tag
+     *
      * @return void
      */
     public function addTag(Tag $tag): void

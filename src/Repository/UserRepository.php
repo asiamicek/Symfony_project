@@ -43,7 +43,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * UserRepository constructor.
      *
-     * @param ManagerRegistry $registry Manager registry
+     * @param ManagerRegistry              $registry        Manager registry
+     * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(ManagerRegistry $registry, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -53,6 +54,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     * @param UserInterface $user
+     * @param string        $newEncodedPassword
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws UnsupportedUserException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
@@ -68,7 +76,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Save user.
      *
-     * @param User $user User entity
+     * @param User        $user        User entity
      * @param string|null $newPassword
      *
      * @throws ORMException
@@ -76,7 +84,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      */
     public function save(User $user, string $newPassword = null)
     {
-        if($newPassword) {
+        if ($newPassword) {
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
                     $user,
@@ -103,11 +111,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Get or create new query builder.
      *
-     * @param QueryBuilder|null $queryBuilder   Query builder
+     * @param QueryBuilder|null $queryBuilder Query builder
      *
      * @return QueryBuilder                     Query builder
      */
-
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('user');

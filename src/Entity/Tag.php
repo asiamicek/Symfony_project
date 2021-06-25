@@ -86,6 +86,7 @@ class Tag
      * Setter for Title.
      *
      * @param string $title
+     *
      * @return void
      */
     public function setTitle(string $title): void
@@ -107,6 +108,7 @@ class Tag
      * Add Note.
      *
      * @param Note $note
+     *
      * @return void
      */
     public function addNote(Note $note): void
@@ -121,6 +123,7 @@ class Tag
      * Remove Note.
      *
      * @param Note $note
+     *
      * @return void
      */
     public function removeNote(Note $note): void

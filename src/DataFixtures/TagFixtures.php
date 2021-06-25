@@ -20,9 +20,10 @@ class TagFixtures extends AbstractBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(10, 'tags', function ($i){
+        $this->createMany(10, 'tags', function ($i) {
             $tag = new Tag();
             $tag->setTitle($this->faker->word);
+
             return $tag;
         });
 

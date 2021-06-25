@@ -82,6 +82,7 @@ class Register
 
     /**
      * Getter for Int.
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -90,6 +91,7 @@ class Register
 
     /**
      * Getter for Title.
+     * @return string|null
      */
     public function getTitle(): ?string
     {
@@ -100,6 +102,7 @@ class Register
      * Setter for Title.
      *
      * @param string $title
+     *
      * @return void
      */
     public function setTitle(string $title): void
@@ -109,6 +112,7 @@ class Register
 
     /**
      * Getter for Category.
+     * @return Category|null
      */
     public function getCategory(): ?Category
     {
@@ -119,6 +123,7 @@ class Register
      * Setter for Category.
      *
      * @param Category|null $category
+     *
      * @return void
      */
     public function setCategory(?Category $category): void
@@ -164,6 +169,7 @@ class Register
 
     /**
      * Getter for Author.
+     * @return User|null
      */
     public function getAuthor(): ?User
     {

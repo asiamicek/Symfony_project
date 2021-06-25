@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class TagController.
  *
  * @Route("/tag")
+ *
  * @IsGranted("ROLE_ADMIN")
  */
 class TagController extends AbstractController

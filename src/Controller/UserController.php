@@ -91,13 +91,17 @@ class UserController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request        $request            HTTP request
-     * @param UserRepository $userdataRepository User repository
+     * @param Request        $request        HTTP request
+     * @param User           $user
+     * @param UserRepository $userRepository
      *
      * @return Response HTTP response
      *
      * @throws ORMException
      * @throws OptimisticLockException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Form\Exception\OutOfBoundsException
+     * @throws \Symfony\Component\Form\Exception\RuntimeException
      *
      * @Route(
      *     "/{id}/edit",

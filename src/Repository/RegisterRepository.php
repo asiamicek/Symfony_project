@@ -9,7 +9,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
-
 /**
  * @method Register|null find($id, $lockMode = null, $lockVersion = null)
  * @method Register|null findOneBy(array $criteria, array $orderBy = null)
@@ -29,6 +28,10 @@ class RegisterRepository extends ServiceEntityRepository
      */
     const PAGINATOR_ITEMS_PER_PAGE = 10;
 
+    /**
+     * RegisterRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Register::class);
@@ -104,7 +107,6 @@ class RegisterRepository extends ServiceEntityRepository
             ->select(
                 'partial register.{id, title}',
                 'partial category.{id, title}',
-
             )
             ->join('register.category', 'category')
             ->orderBy('register.id', 'DESC');
@@ -195,6 +197,4 @@ class RegisterRepository extends ServiceEntityRepository
 //        return $result;
 //
 //    }
-
-
 }

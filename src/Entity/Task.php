@@ -97,6 +97,7 @@ class Task
      * Setter for Content.
      *
      * @param string $content
+     *
      * @return void
      */
     public function setContent(string $content): void
@@ -118,6 +119,7 @@ class Task
      * Setter for Priority.
      *
      * @param int $priority
+     *
      * @return void
      */
     public function setPriority(int $priority): void
@@ -139,6 +141,7 @@ class Task
      * Setter for Deadline.
      *
      * @param DateTimeInterface $deadline
+     *
      * @return void
      */
     public function setDeadline(DateTimeInterface $deadline): void
@@ -160,6 +163,7 @@ class Task
      * Setter for Register.
      *
      * @param Register|null $register
+     *
      * @return void
      */
     public function setRegister(?Register $register): void

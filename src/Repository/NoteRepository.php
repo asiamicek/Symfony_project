@@ -86,6 +86,34 @@ class NoteRepository extends ServiceEntityRepository
     }
 
     /**
+     * Save record.
+     *
+     * @param \App\Entity\Note $note Note entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Note $note): void
+    {
+        $this->_em->persist($note);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete record.
+     *
+     * @param \App\Entity\Note $note Note entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Note $note): void
+    {
+        $this->_em->remove($note);
+        $this->_em->flush();
+    }
+
+    /**
      * Apply filters to paginated list.
      *
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder Query builder
@@ -118,33 +146,5 @@ class NoteRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('note');
-    }
-
-    /**
-     * Save record.
-     *
-     * @param \App\Entity\Note $note Note entity
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function save(Note $note): void
-    {
-        $this->_em->persist($note);
-        $this->_em->flush();
-    }
-
-    /**
-     * Delete record.
-     *
-     * @param \App\Entity\Note $note Note entity
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function delete(Note $note): void
-    {
-        $this->_em->remove($note);
-        $this->_em->flush();
     }
 }

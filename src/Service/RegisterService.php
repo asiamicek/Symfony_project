@@ -43,35 +43,13 @@ class RegisterService
      *
      * @param \App\Repository\RegisterRepository      $registerRepository Register repository
      * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
-     * @param \App\Service\CategoryService            $categoryService Category service
+     * @param \App\Service\CategoryService            $categoryService    Category service
      */
     public function __construct(RegisterRepository $registerRepository, PaginatorInterface $paginator, CategoryService $categoryService)
     {
         $this->registerRepository = $registerRepository;
         $this->paginator = $paginator;
         $this->categoryService = $categoryService;
-    }
-
-    /**
-     * Prepare filters for the tasks list.
-     *
-     * @param array $filters Raw filters from request
-     *
-     * @return array Result array of filters
-     */
-    private function prepareFilters(array $filters): array
-    {
-        $resultFilters = [];
-        if (isset($filters['category_id']) && is_numeric($filters['category_id'])) {
-            $category = $this->categoryService->findOneById(
-                $filters['category_id']
-            );
-            if (null !== $category) {
-                $resultFilters['category'] = $category;
-            }
-        }
-
-        return $resultFilters;
     }
 
     /**
@@ -135,10 +113,34 @@ class RegisterService
 
     /**
      * @param User $user
+     *
      * @return Register[]
      */
     public function findByAuthor(User $user): array
     {
         return $this->registerRepository->findByAuthor($user);
+    }
+
+
+    /**
+     * Prepare filters for the tasks list.
+     *
+     * @param array $filters Raw filters from request
+     *
+     * @return array Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (isset($filters['category_id']) && is_numeric($filters['category_id'])) {
+            $category = $this->categoryService->findOneById(
+                $filters['category_id']
+            );
+            if (null !== $category) {
+                $resultFilters['category'] = $category;
+            }
+        }
+
+        return $resultFilters;
     }
 }

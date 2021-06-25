@@ -74,6 +74,7 @@ class Category
 
     /**
      * Getter for Id.
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -82,6 +83,7 @@ class Category
 
     /**
      * Getter fot Title.
+     * @return string|null
      */
     public function getTitle(): ?string
     {
@@ -90,6 +92,7 @@ class Category
 
     /**
      * Setter for Title.
+     * @param string $title
      *
      * @return void
      */
@@ -110,6 +113,7 @@ class Category
 
     /**
      * Add Note.
+     * @param Note $note
      *
      * @return void
      */
@@ -125,6 +129,7 @@ class Category
      * Remove note.
      *
      * @param Note $note
+     *
      * @return void
      */
     public function removeNote(Note $note): void
@@ -151,6 +156,7 @@ class Category
      * Add register.
      *
      * @param Register $register
+     *
      * @return void
      */
     public function addRegister(Register $register): void
@@ -165,6 +171,7 @@ class Category
      * Remove Register.
      *
      * @param Register $register
+     *
      * @return $void
      */
     public function removeRegister(Register $register): void

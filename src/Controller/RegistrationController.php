@@ -20,10 +20,13 @@ class RegistrationController extends AbstractController
     /**
      * Registration.
      *
-     * @param Request $request HTTP request
+     * @param Request                      $request         HTTP request
      * @param UserPasswordEncoderInterface $passwordEncoder
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Symfony\Component\Form\Exception\LogicException
+     *
      * @Route(
      *     "/signup",
      *     methods={"GET", "POST"},

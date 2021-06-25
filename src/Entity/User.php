@@ -214,6 +214,7 @@ class User implements UserInterface
 
     /**
      * Getter for Firstname.
+     * @return string|null
      */
     public function getFirstname(): ?string
     {
@@ -222,6 +223,7 @@ class User implements UserInterface
 
     /**
      * Setter for Firstname.
+     * @param string $firstname
      *
      * @return $this
      */
@@ -234,6 +236,7 @@ class User implements UserInterface
 
     /**
      * Getter for Lastname.
+     * @return string|null
      */
     public function getLastname(): ?string
     {
@@ -242,6 +245,7 @@ class User implements UserInterface
 
     /**
      * Setter for Lastname.
+     * @param string $lastname
      *
      * @return $this
      */

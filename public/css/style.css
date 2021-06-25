@@ -25,7 +25,10 @@ header{
     width:80vw;
 }
 #logo{
-    width:13vw;
+    width:16vw;
+    padding-left: 2vw;
+    padding-bottom: 1.5vw;
+}
 }
 img{
     width:18vw;

@@ -30,6 +30,9 @@ class TaskType extends AbstractType
 
     /**
      * TaskType constructor.
+     * @param RegisterService $registerService
+     * @param TaskService     $taskService
+     * @param Security        $security
      */
     public function __construct(RegisterService $registerService, TaskService $taskService, Security $security)
     {
@@ -46,7 +49,8 @@ class TaskType extends AbstractType
      * top most type. Type extensions can further modify the form.
      *
      * @param \Symfony\Component\Form\FormBuilderInterface $builder The form builder
-     * @param array $options The options
+     * @param array                                        $options The options
+     *
      * @see FormTypeExtensionInterface::buildForm()
      *
      */

@@ -12,7 +12,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
-
 /**
  * Class TaskRepository.
  *
@@ -46,6 +45,7 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * Query all records.
      * @param array $filters
+     *
      * @return \Doctrine\ORM\QueryBuilder Query builder
      */
     public function queryAll(array $filters = []): QueryBuilder
@@ -63,8 +63,9 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param User $user
+     * @param User  $user
      * @param array $filters
+     *
      * @return QueryBuilder
      */
     public function queryByAuthor(User $user, array $filters = []): QueryBuilder
@@ -72,12 +73,40 @@ class TaskRepository extends ServiceEntityRepository
 
         $queryBuilder = $this->queryAll($filters);
         $queryBuilder
-            ->join('task.register', 'reg' )
+            ->join('task.register', 'reg')
             ->leftJoin('register.author', 'aut')
             ->andWhere('register.author = :author')
             ->setParameter('author', $user);
 
         return $queryBuilder;
+    }
+    /**
+     * Save record.
+     *
+     * @param Task $task
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Task $task): void
+    {
+        $this->_em->persist($task);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete record.
+     *
+     * @param \App\Entity\Task $task Task entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Task $task): void
+    {
+        $this->_em->remove($task);
+        $this->_em->flush();
     }
 
     /**
@@ -109,26 +138,4 @@ class TaskRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('task');
     }
-
-    public function save(Task $task): void
-    {
-        $this->_em->persist($task);
-        $this->_em->flush();
-    }
-
-    /**
-     * Delete record.
-     *
-     * @param \App\Entity\Task $task Task entity
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function delete(Task $task): void
-    {
-        $this->_em->remove($task);
-        $this->_em->flush();
-    }
-
 }
-

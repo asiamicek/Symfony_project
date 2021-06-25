@@ -11,7 +11,6 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 /**
  * Class TaskService.
  */
@@ -41,9 +40,9 @@ class TaskService
     /**
      * TaskService constructor.
      *
-     * @param \App\Repository\TaskRepository      $taskRepository Task repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
-     * @param \App\Service\RegisterService $registerService Register service
+     * @param \App\Repository\TaskRepository          $taskRepository  Task repository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator       Paginator
+     * @param \App\Service\RegisterService            $registerService Register service
      */
     public function __construct(TaskRepository $taskRepository, PaginatorInterface $paginator, RegisterService $registerService)
     {
@@ -53,33 +52,11 @@ class TaskService
     }
 
     /**
-     * Prepare filters for the tasks list.
-     *
-     * @param array $filters Raw filters from request
-     *
-     * @return array Result array of filters
-     */
-    private function prepareFilters(array $filters): array
-    {
-        $resultFilters = [];
-        if (isset($filters['register_id']) && is_numeric($filters['register_id'])) {
-            $register = $this->registerService->findOneById(
-                $filters['register_id']
-            );
-            if (null !== $register) {
-                $resultFilters['register'] = $register;
-            }
-        }
-
-        return $resultFilters;
-    }
-
-    /**
      * Create paginated list.
      *
-     * @param int $page Page number
+     * @param int           $page    Page number
      * @param UserInterface $user
-     * @param array $filters Filters array
+     * @param array         $filters Filters array
      *
      * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
      */
@@ -118,5 +95,28 @@ class TaskService
     public function delete(Task $task): void
     {
         $this->taskRepository->delete($task);
+    }
+
+
+    /**
+     * Prepare filters for the tasks list.
+     *
+     * @param array $filters Raw filters from request
+     *
+     * @return array Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (isset($filters['register_id']) && is_numeric($filters['register_id'])) {
+            $register = $this->registerService->findOneById(
+                $filters['register_id']
+            );
+            if (null !== $register) {
+                $resultFilters['register'] = $register;
+            }
+        }
+
+        return $resultFilters;
     }
 }

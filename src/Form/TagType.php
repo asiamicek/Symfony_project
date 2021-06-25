@@ -24,8 +24,8 @@ class TagType extends AbstractType
      *
      * @see FormTypeExtensionInterface::buildForm()
      *
-     * @param FormBuilderInterface                         $builder     The form builder
-     * @param array                                        $options     The options
+     * @param FormBuilderInterface $builder The form builder
+     * @param array                $options The options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

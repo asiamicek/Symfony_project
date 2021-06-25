@@ -61,35 +61,6 @@ class NoteService
     }
 
     /**
-     * Prepare filters for the tasks list.
-     *
-     * @param array $filters Raw filters from request
-     *
-     * @return array Result array of filters
-     */
-    private function prepareFilters(array $filters): array
-    {
-        $resultFilters = [];
-        if (isset($filters['category_id']) && is_numeric($filters['category_id'])) {
-            $category = $this->categoryService->findOneById(
-                $filters['category_id']
-            );
-            if (null !== $category) {
-                $resultFilters['category'] = $category;
-            }
-        }
-
-        if (isset($filters['tags_id']) && is_numeric($filters['tags_id'])) {
-            $tag = $this->tagService->findOneById($filters['tags_id']);
-            if (null !== $tag) {
-                $resultFilters['tag'] = $tag;
-            }
-        }
-
-        return $resultFilters;
-    }
-
-    /**
      * Create paginated list.
      *
      * @param int                                                 $page    Page number
@@ -135,5 +106,32 @@ class NoteService
         $this->noteRepository->delete($note);
     }
 
+    /**
+     * Prepare filters for the tasks list.
+     *
+     * @param array $filters Raw filters from request
+     *
+     * @return array Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (isset($filters['category_id']) && is_numeric($filters['category_id'])) {
+            $category = $this->categoryService->findOneById(
+                $filters['category_id']
+            );
+            if (null !== $category) {
+                $resultFilters['category'] = $category;
+            }
+        }
 
+        if (isset($filters['tags_id']) && is_numeric($filters['tags_id'])) {
+            $tag = $this->tagService->findOneById($filters['tags_id']);
+            if (null !== $tag) {
+                $resultFilters['tag'] = $tag;
+            }
+        }
+
+        return $resultFilters;
+    }
 }

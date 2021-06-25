@@ -104,14 +104,14 @@ class TaskController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request           $request HTTP request
-     * @param \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Symfony\Component\Form\Exception\LogicException
+     *
      * @Route(
      *     "/create",
      *     methods={"GET", "POST"},
