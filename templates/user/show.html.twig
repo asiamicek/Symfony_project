@@ -17,8 +17,8 @@
             <dd>{{ user.lastname }}</dd>
             <dt>{{ 'label_email'|trans }}</dt>
             <dd>{{ user.email }}</dd>
-            <dt>{{ 'label_password'|trans }}</dt>
-            <dd>{{ user.password }}</dd>
+{#            <dt>{{ 'label_password'|trans }}</dt>#}
+{#            <dd>{{ user.password }}</dd>#}
         </dl>
         <p>
     {% if is_granted('ROLE_ADMIN') %}

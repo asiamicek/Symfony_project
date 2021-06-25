@@ -122,6 +122,10 @@
                 <source>label_none</source>
                 <target>--------</target>
             </trans-unit>
+            <trans-unit id="label_password_new">
+                <source>label_password_new</source>
+                <target>Nowe hasło</target>
+            </trans-unit>
             <trans-unit id="label_password_repeat">
                 <source>label_password_repeat</source>
                 <target>Powtórz hasło</target>
@@ -293,6 +297,10 @@
             <trans-unit id="title_index">
                 <source>title_index</source>
                 <target>Get Organized</target>
+            </trans-unit>
+            <trans-unit id="title_login">
+                <source>title_login</source>
+                <target>Logowanie</target>
             </trans-unit>
             <trans-unit id="title_record_list">
                 <source>title_record_list</source>

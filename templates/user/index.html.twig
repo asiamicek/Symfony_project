@@ -20,7 +20,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label_firstname'|trans, 'user.firstname') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_lastname'|trans, 'user.lastname') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_email'|trans, 'user.email') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label_password'|trans, 'user.password') }}</th>
+{#                <th>{{ knp_pagination_sortable(pagination, 'label_password'|trans, 'user.password') }}</th>#}
                 <th>{{ 'label_actions'|trans }}</th>
             </tr>
             </thead>
@@ -31,7 +31,7 @@
                     <td>{{ users.firstname }}</td>
                     <td>{{ users.lastname }}</td>
                     <td>{{ users.email }}</td>
-                    <td>{{ users.password }}</td>
+{#                    <td>{{ users.password }}</td>#}
                     <td>
                         <a href="{{ url('user_show', {id: users.id}) }}" title="{{ 'action_show'|trans }}">
                             {{ 'action_show'|trans }}

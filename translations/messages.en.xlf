@@ -122,9 +122,13 @@
                 <source>label_none</source>
                 <target>--------</target>
             </trans-unit>
+            <trans-unit id="label_password_new">
+                <source>label_password_new</source>
+                <target>New password</target>
+            </trans-unit>
             <trans-unit id="label_password_repeat">
                 <source>label_password_repeat</source>
-                <target>Repeat password</target>
+                <target>Repeat new password</target>
             </trans-unit>
             <trans-unit id="label_password">
                 <source>label_password</source>
@@ -293,6 +297,10 @@
             <trans-unit id="title_index">
                 <source>title_index</source>
                 <target>Get Organized</target>
+            </trans-unit>
+            <trans-unit id="title_login">
+                <source>title_login</source>
+                <target>Log in</target>
             </trans-unit>
             <trans-unit id="title_record_list">
                 <source>title_record_list</source>
