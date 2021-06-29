@@ -138,6 +138,10 @@
                 <source>label_priority</source>
                 <target>Priority</target>
             </trans-unit>
+            <trans-unit id="label_priority_form">
+                <source>label_priority_form</source>
+                <target>Priority (1-5)</target>
+            </trans-unit>
             <trans-unit id="label_reg_id">
                 <source>label_reg_id</source>
                 <target>Register id</target>
@@ -341,6 +345,10 @@
             <trans-unit id="title_register_index">
                 <source>title_register_index</source>
                 <target>Registers</target>
+            </trans-unit>
+            <trans-unit id="title_registration">
+                <source>title_registration</source>
+                <target>Registration</target>
             </trans-unit>
             <trans-unit id="title_tag_delete">
                 <source>title_tag_delete</source>

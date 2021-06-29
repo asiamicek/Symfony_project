@@ -86,7 +86,7 @@ class TaskType extends AbstractType
             'priority',
             NumberType::class,
             [
-                'label' => 'label_priority',
+                'label' => 'label_priority_form',
                 'required' => true,
             ]
         );
