@@ -126,10 +126,20 @@ Search.appendIndex(
             "summary": "Class\u0020RegistrationController.",
             "url": "classes/App-Controller-RegistrationController.html"
         },                {
+            "fqsen": "\\App\\Controller\\RegistrationController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "UserController\u0020constructor.",
+            "url": "classes/App-Controller-RegistrationController.html#method___construct"
+        },                {
             "fqsen": "\\App\\Controller\\RegistrationController\u003A\u003Aregister\u0028\u0029",
             "name": "register",
             "summary": "Registration.",
             "url": "classes/App-Controller-RegistrationController.html#method_register"
+        },                {
+            "fqsen": "\\App\\Controller\\RegistrationController\u003A\u003A\u0024userService",
+            "name": "userService",
+            "summary": "User\u0020service.",
+            "url": "classes/App-Controller-RegistrationController.html#property_userService"
         },                {
             "fqsen": "\\App\\Controller\\SecurityController",
             "name": "SecurityController",
@@ -226,6 +236,11 @@ Search.appendIndex(
             "summary": "Class\u0020UserController.",
             "url": "classes/App-Controller-UserController.html"
         },                {
+            "fqsen": "\\App\\Controller\\UserController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "UserController\u0020constructor.",
+            "url": "classes/App-Controller-UserController.html#method___construct"
+        },                {
             "fqsen": "\\App\\Controller\\UserController\u003A\u003Aindex\u0028\u0029",
             "name": "index",
             "summary": "Index\u0020action.",
@@ -240,6 +255,11 @@ Search.appendIndex(
             "name": "edit",
             "summary": "Edit\u0020action.",
             "url": "classes/App-Controller-UserController.html#method_edit"
+        },                {
+            "fqsen": "\\App\\Controller\\UserController\u003A\u003A\u0024userService",
+            "name": "userService",
+            "summary": "User\u0020service.",
+            "url": "classes/App-Controller-UserController.html#property_userService"
         },                {
             "fqsen": "\\App\\DataFixtures\\AbstractBaseFixtures",
             "name": "AbstractBaseFixtures",
@@ -1710,6 +1730,36 @@ Search.appendIndex(
             "name": "registerService",
             "summary": "Register\u0020service.",
             "url": "classes/App-Service-TaskService.html#property_registerService"
+        },                {
+            "fqsen": "\\App\\Service\\UserService",
+            "name": "UserService",
+            "summary": "Class\u0020UserService.",
+            "url": "classes/App-Service-UserService.html"
+        },                {
+            "fqsen": "\\App\\Service\\UserService\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "UserService\u0020constructor.",
+            "url": "classes/App-Service-UserService.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Service\\UserService\u003A\u003AcreatePaginatedList\u0028\u0029",
+            "name": "createPaginatedList",
+            "summary": "Create\u0020paginated\u0020list.",
+            "url": "classes/App-Service-UserService.html#method_createPaginatedList"
+        },                {
+            "fqsen": "\\App\\Service\\UserService\u003A\u003Asave\u0028\u0029",
+            "name": "save",
+            "summary": "Save\u0020User.",
+            "url": "classes/App-Service-UserService.html#method_save"
+        },                {
+            "fqsen": "\\App\\Service\\UserService\u003A\u003A\u0024userRepository",
+            "name": "userRepository",
+            "summary": "User\u0020repository.",
+            "url": "classes/App-Service-UserService.html#property_userRepository"
+        },                {
+            "fqsen": "\\App\\Service\\UserService\u003A\u003A\u0024paginator",
+            "name": "paginator",
+            "summary": "Paginator.",
+            "url": "classes/App-Service-UserService.html#property_paginator"
         },                {
             "fqsen": "\\",
             "name": "\\",
