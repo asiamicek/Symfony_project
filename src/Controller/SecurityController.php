@@ -1,4 +1,7 @@
 <?php
+/**
+ * Security Controller.
+ */
 
 namespace App\Controller;
 
@@ -9,7 +12,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class SecurityController
- * @package App\Controller
  */
 class SecurityController extends AbstractController
 {

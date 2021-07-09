@@ -96,7 +96,8 @@ class UserController extends AbstractController
                 'user/show.html.twig',
                 ['user' => $log]
             );
-        } else {
+        }
+        if ($user !== $log) {
             $this->addFlash('warning', 'message_item_not_found');
 
             return $this->redirectToRoute('note_index');

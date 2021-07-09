@@ -1,4 +1,7 @@
 <?php
+/**
+ * Tag Repository.
+ */
 
 namespace App\Repository;
 

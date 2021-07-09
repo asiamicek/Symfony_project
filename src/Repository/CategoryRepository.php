@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Category Repository.
+ */
 namespace App\Repository;
 
 use App\Entity\Category;
